@@ -50,7 +50,6 @@
 </template>
 
 <script>
-
   export default {
     name: "index",
     data() {
@@ -95,6 +94,7 @@
     .el-container {
       height: 100%;
 
+
       .el-header {
         color: #333;
         text-align: center;
@@ -120,8 +120,11 @@
         background-color: #E9EEF3;
         color: #333;
         text-align: center;
-        line-height: 160px;
         height: 100%;
+        padding: 0;
+        #content{
+          height: 100%;
+        }
       }
     }
   }

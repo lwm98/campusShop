@@ -11,7 +11,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 /* eslint-disable no-new */
-
+import '../static/css/animate.min.css'
 new Vue({
   el: '#app',
   router,
