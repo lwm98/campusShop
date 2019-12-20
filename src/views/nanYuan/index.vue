@@ -74,14 +74,14 @@
                 <div class="num">{{index+1}}</div>
                 <div class="content">
                   <div class="img">
-                    <a :href="item.href" target="_blank">
+                    <router-link :to="'/comment/'+item.newsId">
                       <div class="lazy-img cover">
                         <img
                           :alt="item.title"
                           :src="item.img"
                         />
                       </div>
-                    </a>
+                    </router-link>
                     <div class="watch-later-trigger w-later"></div>
                   </div>
                   <div class="info">
@@ -115,6 +115,7 @@
           </el-tab-pane>
           <el-tab-pane label="联系我们" name="fourth">联系我们</el-tab-pane>
         </el-tabs>
+          <router-view></router-view>
       </div>
     </div>
     <!--      <my-footer></my-footer>-->
@@ -168,17 +169,19 @@
         ],
         newsInfo: [
           {
-            href:'https://www.bilibili.com/video/av79272755',
+            newsId:1,
             img: '/static/img/new/commentImg.jpg',
             title: '实名推荐这个薯条 十分好吃！！不吃血亏！！！',
+            desc:'你们吃过吗 今天那个薯条特别特别好吃！强烈推荐啊啊啊',
             userId: '电音之王克里斯吴',
             watch: '7000',
             comments: '788',
             date: '2019/12/20 17:11'
           },{
-            href:'https://www.bilibili.com/video/av79272755',
+            newsId:2,
             img: '/static/img/new/commentImg1.jpg',
             title: '今天的鸡翅也非常不错！你们吃了吗',
+            desc:'你们吃过吗 今天那个薯条特别特别好吃！强烈推荐啊啊啊',
             userId: '电音之王克里斯吴',
             watch: '7000',
             comments: '788',

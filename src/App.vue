@@ -16,13 +16,26 @@ export default {
   height: 100%;
   font-weight: 400;
 }
-.el-collapse-item__header {
-  background-color: #f9f9f9 !important;
-  min-height: 80px;
+a{
+  text-decoration: none;
 }
-  .el-collapse-item__content{
-    min-height: 120px;
-  }
+i{
+  font-style: normal;
+}
+.el-collapse-item__header {
+  color: #409EFF;
+  /*background-color: #f9f9f9 !important;*/
+  /*min-height: 80px;*/
+}
+.el-collapse-item__wrap,.el-collapse-item__header,.el-collapse-item__content{
+
+  background-color: #f9f9f9 !important;
+}
+  /*.el-collapse-item__content{*/
+  /*  background-color: #f9f9f9 !important;*/
+  /*  !*min-height: 120px;*!*/
+  /*}*/
+
   .el-tree-node__label{
     font-size: 21px;
   }

@@ -6,9 +6,9 @@
             <el-menu-item index="/">首页</el-menu-item>
           <el-submenu index="2">
             <template slot="title">选择商区</template>
-              <el-menu-item index="yaYuan">雅苑区</el-menu-item>
-              <el-menu-item index="boYuan">博苑区</el-menu-item>
-            <el-menu-item index="nanYuan">南苑区</el-menu-item>
+              <el-menu-item index="/yaYuan">雅苑区</el-menu-item>
+              <el-menu-item index="/boYuan">博苑区</el-menu-item>
+            <el-menu-item index="/nanYuan">南苑区</el-menu-item>
           </el-submenu>
           <el-input type="primary" placeholder="请输入你想查询的店铺" style="width: 200px;margin-right: 20px;margin-left: 10px;"></el-input>
           <el-button icon="el-icon-search" circle></el-button>

@@ -5,6 +5,7 @@ import indexContent from '../views/index/indexContent'
 import yaYuan from '../views/yaYuan/index'
 import boYuan from '../views/boYuan/index'
 import nanYuan from '../views/nanYuan/index'
+import comment from '../components/comments.vue'
 Vue.use(Router);
 
 export default new Router({
@@ -34,8 +35,18 @@ export default new Router({
         {
           path: 'nanYuan',
           name: '南苑',
-          component: nanYuan
+          component: nanYuan,
+          // children:[
+          //   {
+          //
+          //   }
+          // ]
         },
+        {
+          path: 'comment/:id',
+          name: '评论',
+          component: comment
+        }
       ]
     },
   ]
