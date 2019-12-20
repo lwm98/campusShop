@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="content">
       <header class="page-head">
         <div class="header-wrapper">
           <div class="container">
@@ -26,6 +26,9 @@
 </script>
 
 <style scoped lang="scss">
+  #content{
+    height: 100%;
+  }
   .page-head{
     background: url('/static/img/multiple_blog-bg.jpg');
     background-size: cover;

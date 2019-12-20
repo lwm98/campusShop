@@ -9,13 +9,8 @@
               <el-menu-item index="yaYuan">雅苑区</el-menu-item>
               <el-menu-item index="boYuan">博苑区</el-menu-item>
             <el-menu-item index="nanYuan">南苑区</el-menu-item>
-<!--            <el-submenu index="2-4">-->
-<!--                <template slot="title">博苑区</template>-->
-<!--                <el-menu-item index="2-4-1">东门商铺</el-menu-item>-->
-<!--                <el-menu-item index="2-4-2">一饭二楼</el-menu-item>-->
-<!--              </el-submenu>-->
           </el-submenu>
-          <el-input type="primary" placeholder="请输入你想查询的店铺" style="width: 200px;margin-right: 20px;"></el-input>
+          <el-input type="primary" placeholder="请输入你想查询的店铺" style="width: 200px;margin-right: 20px;margin-left: 10px;"></el-input>
           <el-button icon="el-icon-search" circle></el-button>
           <el-submenu index="4">
             <template slot="title">我</template>
