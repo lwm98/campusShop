@@ -1,5 +1,6 @@
 <template>
   <div id="content">
+    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
     <div class="headline text-center title">
       <el-row >
         <el-col :span="12" :offset="6">
@@ -96,7 +97,21 @@
 </script>
 
 <style scoped lang="scss">
-  .mask{
+  /*.-webkit-scrollbar{*/
+  /*  width: 10px;     !*高宽分别对应横竖滚动条的尺寸*!*/
+  /*  height: 1px;*/
+  /*}*/
+  /*.-webkit-scrollbar-thumb {*/
+  /*  border-radius: 10px;*/
+  /*  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+  /*  background: #535353;*/
+  /*}*/
+  /*.-webkit-scrollbar-track {*/
+  /*  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+  /*  border-radius: 10px;*/
+  /*  background: #EDEDED;*/
+  /*}*/
+    .mask{
     height: 100%;
     width: 100%;
     position: absolute;
@@ -162,14 +177,19 @@
     }
   }
   .section-title {
+    font-size: 30px;
     margin-top: 30px;
     margin-bottom: 5px;
     text-transform: uppercase;
+    font-weight: 400;
   }
   .section-sub-title {
     color: #969595;
     margin-bottom: 0px;
     text-transform: capitalize;
     word-spacing: 1px;
+  }
+  .page-component__scroll .el-scrollbar__wrap{
+    overflow-x: hidden;
   }
 </style>

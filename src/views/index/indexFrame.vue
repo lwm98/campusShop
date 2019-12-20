@@ -13,7 +13,9 @@
           <el-input type="primary" placeholder="请输入你想查询的店铺" style="width: 200px;margin-right: 20px;margin-left: 10px;"></el-input>
           <el-button icon="el-icon-search" circle></el-button>
           <el-submenu index="4">
-            <template slot="title">我</template>
+            <template slot="title">
+              <el-avatar :size="30" :src="'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'"></el-avatar>
+            </template>
             <el-menu-item index="4-1">选项1</el-menu-item>
             <el-menu-item index="4-2">选项2</el-menu-item>
             <el-menu-item index="4-3">退出登录</el-menu-item>
