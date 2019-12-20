@@ -2,25 +2,18 @@
   <div id="container">
     <el-container>
       <el-header class="xcenter">
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <router-link to="/">
-            <el-menu-item index="1">首页</el-menu-item>
-          </router-link>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :router="true">
+            <el-menu-item index="/">首页</el-menu-item>
           <el-submenu index="2">
             <template slot="title">选择商区</template>
-            <router-link to="yaYuan">
-              <el-menu-item index="2-1">雅苑区</el-menu-item>
-            </router-link>
-            <router-link to="nanYuan">
-              <el-menu-item index="2-3">南苑区</el-menu-item>
-            </router-link>
-            <router-link to="">
-              <el-submenu index="2-4">
-                <template slot="title">博苑区</template>
-                <el-menu-item index="2-4-1">东门商铺</el-menu-item>
-                <el-menu-item index="2-4-2">一饭二楼</el-menu-item>
-              </el-submenu>
-            </router-link>
+              <el-menu-item index="yaYuan">雅苑区</el-menu-item>
+              <el-menu-item index="boYuan">博苑区</el-menu-item>
+            <el-menu-item index="nanYuan">南苑区</el-menu-item>
+<!--            <el-submenu index="2-4">-->
+<!--                <template slot="title">博苑区</template>-->
+<!--                <el-menu-item index="2-4-1">东门商铺</el-menu-item>-->
+<!--                <el-menu-item index="2-4-2">一饭二楼</el-menu-item>-->
+<!--              </el-submenu>-->
           </el-submenu>
           <el-input type="primary" placeholder="请输入你想查询的店铺" style="width: 200px;margin-right: 20px;"></el-input>
           <el-button icon="el-icon-search" circle></el-button>
@@ -117,7 +110,7 @@
       }
 
       .el-main {
-        background-color: #E9EEF3;
+        background-color: #f9f9f9;
         color: #333;
         text-align: center;
         height: 100%;

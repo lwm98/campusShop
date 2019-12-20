@@ -12,7 +12,8 @@
     </div>
     <div class="portfolio-item-list choose">
       <el-row :gutter="20">
-        <el-col :span="8">
+        <el-col :span="8" v-for="(item,index) in areaList" :key="index">
+          <router-link :to="item.index">
           <div class="portfolio-item">
             <div class="item-image" id="item-image">
                 <div class="mask animated fadeInRight">
@@ -30,120 +31,57 @@
               <el-row>
                 <el-col :span="12">
                    <span class="item-name">
-                      Oliver a Note
+                      {{item.name}}
                   </span>
                   <span class="decoration">
-                      Fashion
+                      {{item.hot}}
                   </span>
                 </el-col>
                 <el-col :span="12">
                   <span class="like">
                       <i class="el-icon-thumb"></i>
-                      576
+                      {{item.clickTime}}
                   </span>
                 </el-col>
               </el-row>
             </div> <!-- end of /.item-description -->
           </div> <!-- end of /.portfolio-item -->
-
-        </el-col>
-        <el-col :span="8">
-          <div class="portfolio-item">
-            <div class="item-image">
-              <div class="mask animated fadeInRight">
-                <div class="mySearch">
-                  <i class="el-icon-zoom-in animated bounce"></i>
-                </div>
-              </div>
-              <a href="#">
-                <img src="/static/img/portfolio3.jpg" class="img-responsive center-block" alt="portfolio1">
-                <div style="display: none; left: 0px; top: 100%; transition: all 300ms ease 0s;"><span><i class="fa fa-plus"></i></span></div>
-              </a>
-            </div>
-
-            <div class="item-description">
-              <el-row>
-                <el-col :span="12">
-                   <span class="item-name">
-                      Oliver a Note
-                  </span>
-                  <span class="decoration">
-                      Fashion
-                  </span>
-                </el-col>
-                <el-col :span="12">
-                  <span class="like">
-                      <i class="el-icon-thumb"></i>
-                      576
-                  </span>
-                </el-col>
-              </el-row>
-            </div> <!-- end of /.item-description -->
-          </div> <!-- end of /.portfolio-item -->
-
-        </el-col>
-        <el-col :span="8">
-          <div class="portfolio-item">
-            <div class="item-image">
-              <div class="mask animated fadeInRight">
-                <div class="mySearch">
-                  <i class="el-icon-zoom-in animated bounce"></i>
-                </div>
-              </div>
-              <a href="#">
-                <img src="/static/img/portfolio2.jpg" class="img-responsive center-block" alt="portfolio1">
-                <div style="display: none; left: 0px; top: 100%; transition: all 300ms ease 0s;"><span><i class="fa fa-plus"></i></span></div>
-              </a>
-            </div>
-
-            <div class="item-description">
-              <el-row>
-                <el-col :span="12">
-                   <span class="item-name">
-                      Oliver a Note
-                  </span>
-                  <span class="decoration">
-                      Fashion
-                  </span>
-                </el-col>
-                <el-col :span="12">
-                  <span class="like">
-                      <i class="el-icon-thumb"></i>
-                      576
-                  </span>
-                </el-col>
-              </el-row>
-            </div> <!-- end of /.item-description -->
-          </div> <!-- end of /.portfolio-item -->
-
+          </router-link>
         </el-col>
       </el-row>
     </div>
-    <el-footer>
-      <div class="mycenter">
-        <div class="headerBrand">
-          <ul>
-            <li>©LWM-GK-2019</li>
-            <li>广东科技学院</li>
-            <li style="color: #333;font-size: 18px">i have a gream</li>
-            <li>梁维明-毕业设计</li>
-          </ul>
-        </div>
-        <div class="headerBrand">
-          <ul>
-            <li>联系我</li>
-            <li>关于我</li>
-            <li>点个赞吧</li>
-          </ul>
-        </div>
-      </div>
-    </el-footer>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
   export default {
     name: "content",
+    data(){
+      return{
+        areaList:[
+          {
+            index:'yaYuan',
+            name:'雅苑',
+            hot:'雅滋味，四饭',
+            clickTime: 666
+          },
+          {
+            index:'boYuan',
+            name:'博苑',
+            hot:'一饭二楼，东门二楼，报刊亭，博苑超市',
+            clickTime: 999
+
+          },
+          {
+            index:'nanYuan',
+            name:'南苑',
+            hot:'爱时尚，学生超市，胃里果',
+            clickTime: 857
+          }
+        ],
+      }
+    },
     mounted() {
       for (let i in document.getElementsByClassName('item-image')) {
         document.getElementsByClassName('item-image')[i].addEventListener('mousemove',function () {
@@ -168,6 +106,10 @@
     display: none;
     align-items: center;
     .mySearch{
+      .bounce{
+        animation-delay:0.8s;
+        -webkit-animation-delay:0.8s; /* Safari 和 Chrome */
+      }
       margin: 0 auto;
       font-size: 3em;
       color: white;
@@ -189,7 +131,7 @@
       padding: 0 15px;
     }
     .portfolio-item{
-      padding: 15px 0;
+      padding: 15px 15px;
       overflow: hidden;
       .item-image{
         position: relative;
@@ -203,13 +145,20 @@
       .item-description{
       padding: 15px 0px;
       .item-name{
+        text-align: left;
         margin-bottom: 2px;
         font-size: 16px;
         color: #474747;
       }
-      .like,.decoration{
+      .like{
         color: #969595;
+        text-align: right;
       }
+        .decoration{
+          color: #969595;
+          text-align: left;
+          font-size: 12px;
+        }
     }
   }
   .section-title {
@@ -222,31 +171,5 @@
     margin-bottom: 0px;
     text-transform: capitalize;
     word-spacing: 1px;
-  }
-  .el-footer{
-    background-color: #2d2d2d;
-    color: #6B6B6B;
-    min-height: 10%;
-    .mycenter{
-      margin: 0 auto;
-      padding: 0 15px;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      .headerBrand{
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        ul{
-          line-height: 100%;
-          margin: 0;
-          display: flex;
-          list-style: none;
-          li{
-            padding: 0 15px;
-          }
-        }
-      }
-    }
   }
 </style>

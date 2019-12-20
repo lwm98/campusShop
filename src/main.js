@@ -12,6 +12,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 /* eslint-disable no-new */
 import '../static/css/animate.min.css'
+import myfooter from './components/footer'
+Vue.component('my-footer',myfooter);
 new Vue({
   el: '#app',
   router,
