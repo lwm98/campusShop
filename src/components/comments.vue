@@ -1,27 +1,56 @@
 <template>
     <div class="mycomment">
-      <div class="">
-
-      </div>
+      <el-row>
+        <el-col :span="24" class="breadcrumb">
+          <ol>
+            <li><span class="title">评论</span></li>
+            <li><span class="desc">查看评论</span></li>
+          </ol>
+        </el-col>
+      </el-row>
       <div id="details" class="box">
         <div id="comments">
           <div class="commentDetails">
             <el-row>
               <el-col :span="8">
-aa
+                <div class="commentUser">
+                  <div class="headImg">                  <div class="flag"></div>
+                    <el-image :src="userInfo.userHead"></el-image></div>
+                </div>
+                <h5 style="font-weight: 400;font-size: 20px;margin: 0;margin-top: 16px;color:#2d64b3;">{{userInfo.userName}}
+                  ( {{userInfo.userId}} )
+                  <i v-if="userInfo.sex=='男'" class="el-icon-male" style="color:blue"></i>
+                  <i v-if="userInfo.sex=='女'" class="el-icon-female" style="color:deeppink"></i>
+                </h5>
               </el-col>
-              <el-col :span="16">
+              <el-col :span="16" style="padding: 0px 15px; padding-bottom: 15px;">
                 <h4> {{newsInfo.title}}</h4>
+                <h5>{{newsInfo.date}}</h5>
                 <el-divider></el-divider>
                 <div class="newsDetail">
                   <p>{{newsInfo.desc}}</p>
                 </div>
                 <div class="btnGroup">
-                  <el-button>aa</el-button>
+                  <el-button-group>
+                    <el-button icon="el-icon-thumb" type="success" @click="toGood">点赞</el-button>
+                    <el-button icon="el-icon-tickets" plain @click="commentMethod">评论</el-button>
+                    <el-button icon="el-icon-share" type="info" @click="toShare">分享</el-button>
+                  </el-button-group>
                 </div>
               </el-col>
             </el-row>
           </div>
+          <el-dialog
+            title="请输入评论"
+            :visible.sync="commentDialog"
+            width="50%"
+            center>
+            <span>需要注意的是内容是默认不居中的</span>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="centerDialogVisible = false">评 论</el-button>
+              <el-button type="primary" @click="commentDialog = false">取 消</el-button>
+            </span>
+          </el-dialog>
           <h4> 评 论 {{comment.length}} 条</h4>
           <el-divider></el-divider>
           <el-row class="comment" style="margin-top:20px;"
@@ -54,9 +83,12 @@ aa
                   </el-collapse-item>
                 </el-collapse>
                 <!-- ----------------------- -->
-                <el-input  size="small"  placeholder="请输入回复内容" v-model="content"
-                           style="width:200px;margin-top:10px;">
-                </el-input><a href="javascript:;" @click="SetGoodComment(item)"><i class="el-icon-top-left"></i> 回复</a>
+                <div>
+                  <el-input  size="small"  placeholder="请输入回复内容" v-model="content"
+                             style="width:200px;margin-top:10px;">
+                  </el-input>
+                  <el-button icon="el-icon-edit" style="padding: 5px;height: 20px;line-height: 20px" type="warning">回复</el-button>
+                </div>
               </el-col>
             </el-col>
           </el-row>
@@ -71,9 +103,16 @@ aa
         name: "comments",
       data(){
           return{
+            commentDialog:false,
             content:'', //回复
             activeNames:[''],//
             newsId:'',
+            userInfo:{
+              userId:1,
+              userName:'lwm',
+              sex:'男',
+              userHead:'http://pics.sc.chinaz.com/files/pic/pic9/201903/bpic10784.jpg',
+            },
             newsInfo:{
               newsId:1,
               img: '/static/img/new/commentImg.jpg',
@@ -106,19 +145,84 @@ aa
     },
       created() {
           this.newsId = this.$route.params.id;
+      },
+      methods:{
+          toGood(){
+            this.$notify({
+              title: '点赞成功',
+              message: '这是一条成功的提示消息',
+              type: 'success'
+            });
+          },
+        commentMethod(){
+            this.commentDialog = true;
+        },
+        toShare(){
+          this.$notify({
+            title: '分享成功',
+            message: '这是一条成功的提示消息',
+            type: 'success'
+          });
+        }
       }
     }
 </script>
 
 <style scoped lang="scss">
+
   .mycomment{
     background-color: #f9f9f9;
+    .breadcrumb{
+      ol{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .title {
+        font-weight: 400;
+        font-size: 36px;
+        color: white;
+      }
+
+      .desc {
+        font-size: 15px;
+        color: #c7c4c0;
+      }
+      background: url('/static/img/multiple_blog-bg.jpg');
+      padding: 15px;
+    }
   }
   .commentDetails{
+    .flag{
+      z-index: 555555;
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      top: 2px;
+      right: 82px;
+      background: url(//tb2.bdstatic.com/tb/static-user/widget/pb_author/images/louzhu_b77db49.png) no-repeat -44px 0;
+      border: 0 solid red;
+    }
+    .commentUser{
+      padding: 10px 50px;
+      .headImg{
+        position: relative;
+        .el-image{
+          padding: 15px;
+          border: 2px solid black;
+          width: 200px;
+          height: 200px;
+        }
+      }
+    }
+    h5{
+      margin: 0;
+      font-size: 12px;
+      font-weight: 300;
+    }
     .btnGroup{
       width: 100%;
     }
-    background-color: white;
     .newsDetail{
       min-height: 160px;
     }
@@ -132,6 +236,7 @@ aa
         margin: 5px 0;
         font-weight: 400;
         font-size: 26px;
+        margin-top: 10px;
       }
     }
     .el-collapse-item__header{

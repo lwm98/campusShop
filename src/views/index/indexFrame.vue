@@ -16,8 +16,8 @@
             <template slot="title">
               <el-avatar :size="30" :src="'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'"></el-avatar>
             </template>
-            <el-menu-item index="4-1">选项1</el-menu-item>
-            <el-menu-item index="4-2">选项2</el-menu-item>
+            <el-menu-item index="4-1">个人资料</el-menu-item>
+            <el-menu-item index="4-2">管理信息</el-menu-item>
             <el-menu-item index="4-3">退出登录</el-menu-item>
           </el-submenu>
           <el-menu-item index="5">
