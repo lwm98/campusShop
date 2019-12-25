@@ -194,13 +194,33 @@
             label: '爱时尚',
             children: [
               {
-                label: '二级 1-1',
-                children: [
-                  {
-                    label: '三级 1-1-1'
-                  }
-                ]
-              }
+                label: 'Q堡堡',
+                value:'10011'
+              },
+              {
+                label:'张亮麻辣烫'
+              },
+              {
+                label:'正新鸡排'
+              },{
+                label:'书亦烧仙草'
+              },{
+                label:'牛杂'
+              },{
+                label:'益合堂'
+              },{
+                label:'关东煮'
+              },{
+                label:'主恩美食'
+              },{
+                label:'xx'
+              },{
+                label:'xx'
+              },{
+                label:'xx'
+              },{
+                label:'xx'
+              },
             ]
           },
           {
@@ -280,8 +300,8 @@
       handleClick() {
         console.log('a');
       },
-      handleNodeClick() {
-        console.log('a');
+      handleNodeClick(data) {
+        console.log(data);
       }
     }
   };

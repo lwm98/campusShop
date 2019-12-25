@@ -145,6 +145,7 @@
     },
       created() {
           this.newsId = this.$route.params.id;
+
       },
       methods:{
           toGood(){

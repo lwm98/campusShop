@@ -83,6 +83,10 @@
         ],
       }
     },
+    created(){
+      this.$api('','GET',{
+      })
+    },
     mounted() {
       for (let i in document.getElementsByClassName('item-image')) {
         document.getElementsByClassName('item-image')[i].addEventListener('mousemove',function () {

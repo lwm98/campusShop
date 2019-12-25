@@ -22,6 +22,10 @@ a{
 i{
   font-style: normal;
 }
+
+.el-dialog__body,.el-dialog--center .el-dialog__body{
+  padding: 20px 70px;
+}
 .el-collapse-item__header {
   color: #409EFF;
   /*background-color: #f9f9f9 !important;*/
