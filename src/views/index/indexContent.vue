@@ -13,7 +13,7 @@
     </div>
     <div class="portfolio-item-list choose">
       <el-row :gutter="20">
-        <el-col :span="8" v-for="(item,index) in areaList" :key="index">
+        <el-col :span="8" v-for="(item,index) in areaList" :key="index" @click.native="toTotal(index)">
           <router-link :to="item.index">
           <div class="portfolio-item">
             <div class="item-image" id="item-image">
@@ -72,7 +72,6 @@
             name:'博苑',
             hot:'一饭二楼，东门二楼，报刊亭，博苑超市',
             clickTime: 999
-
           },
           {
             index:'nanYuan',
@@ -84,8 +83,8 @@
       }
     },
     created(){
-      this.$api('','GET',{
-      })
+      // this.$api('','GET',{
+      // })
     },
     mounted() {
       for (let i in document.getElementsByClassName('item-image')) {
@@ -94,6 +93,16 @@
         });
         document.getElementsByClassName('item-image')[i].addEventListener('mouseout',function () {
           document.getElementsByClassName('mask')[i].style.display = 'none';
+        })
+      }
+    },
+    methods:{
+      toTotal(i){
+        console.log(i);
+        this.$api('/api/clicksAddInfo','post',{
+          id:i
+        }).then(res=>{
+          console.log(res)
         })
       }
     }

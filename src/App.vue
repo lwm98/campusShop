@@ -16,6 +16,9 @@ export default {
   height: 100%;
   font-weight: 400;
 }
+ul,ol{
+  list-style: none;
+}
 a{
   text-decoration: none;
 }

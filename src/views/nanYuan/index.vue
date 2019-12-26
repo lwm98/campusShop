@@ -30,15 +30,17 @@
         <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
       </div>
       <div class="right">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName" @tab-click="handleClick" v-if="shopInfo != ''">
           <el-tab-pane label="店铺详情" name="first">
             <el-carousel :interval="4000" type="card" height="300px">
-              <el-carousel-item v-for="(item, index) in shopInfo.img" :key="index"><el-image :src="item" style="width: 100%;height: 100%"></el-image></el-carousel-item>
+              <el-carousel-item v-for="(item,index) in shopInfo.img" :key="index">
+                <el-image :src="item" style="width: 100%;height: 100%"></el-image>
+              </el-carousel-item>
             </el-carousel>
             <div>
               <h3 class="text-capitalize">{{ shopInfo.name }}</h3>
               <span class="date">{{ shopInfo.date }}</span>
-              <span>{{ shopInfo.comment }} comments</span>
+              <span>{{ shopInfo.comments }} comments</span>
             </div>
             <div class="desc">
               <p>{{ shopInfo.desc }}</p>
@@ -131,22 +133,7 @@
         activeName: 'first',
         noticeVisible: false,
 
-        shopInfo: {
-          img: ['', '', ''],
-          name: '',
-          date: '',
-          comment: '',
-          desc:
-            "",
-          contact: '',
-          tel: '',
-          address: '',
-          serviceTime: '',
-          notice:
-            '',
-          menu: ['', ''],
-          voucher: ['', '']
-        },
+        shopInfo: '',
         activityInfo: [
           {
             title: '[无门槛] 点击可得6元无门槛优惠券',
@@ -212,15 +199,7 @@
                 label:'关东煮'
               },{
                 label:'主恩美食'
-              },{
-                label:'xx'
-              },{
-                label:'xx'
-              },{
-                label:'xx'
-              },{
-                label:'xx'
-              },
+              }
             ]
           },
           {
@@ -302,6 +281,29 @@
       },
       handleNodeClick(data) {
         console.log(data);
+        this.$api("/api/getAllStoreInfo","POST",{
+          id:data.value
+        }).then(res=>{
+          console.log(res)
+          if (res.code == 0){
+            this.shopInfo = res.data[0];
+            this.shopInfo.img = [];
+            this.shopInfo.menu = [];
+            this.shopInfo.voucher = [];
+            for (let i = 1; i <= 5; i++) {
+              if (res.data[0]['banner'+i]){
+                this.shopInfo.img.push(res.data[0]['banner'+i]);
+              }
+              if (res.data[0]['menu'+i]){
+                this.shopInfo.menu.push(res.data[0]['menu'+i]);
+              }
+              if (res.data[0]['voucher'+i]) {
+                this.shopInfo.voucher.push(res.data[0]['voucher'+i]);
+              }
+            }
+          }
+        })
+
       }
     }
   };

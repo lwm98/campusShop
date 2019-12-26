@@ -16,6 +16,8 @@ Vue.use(ElementUI);
 import '../static/css/animate.min.css'
 import myfooter from './components/footer'
 Vue.component('my-footer',myfooter);
+import mineTitle from './components/mineTitle'
+Vue.component('mineTitle',mineTitle);
 new Vue({
   el: '#app',
   router,

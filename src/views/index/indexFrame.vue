@@ -45,9 +45,9 @@
             <el-menu-item index="/">首页</el-menu-item>
           <el-submenu index="2">
             <template slot="title">选择商区</template>
-              <el-menu-item index="/yaYuan">雅苑区</el-menu-item>
-              <el-menu-item index="/boYuan">博苑区</el-menu-item>
-            <el-menu-item index="/nanYuan">南苑区</el-menu-item>
+              <el-menu-item index="/yaYuan" @click.native="toTotal(0)">雅苑区</el-menu-item>
+              <el-menu-item index="/boYuan" @click.native="toTotal(1)">博苑区</el-menu-item>
+            <el-menu-item index="/nanYuan" @click.native="toTotal(2)">南苑区</el-menu-item>
           </el-submenu>
           <el-input type="primary" placeholder="请输入你想查询的店铺" style="width: 200px;margin-right: 20px;margin-left: 10px;"></el-input>
           <el-button icon="el-icon-search" circle></el-button>
@@ -58,7 +58,7 @@
               <el-avatar :size="30" :src="userInfo.image" v-if="userInfo.image"></el-avatar>
               <el-avatar :size="30" :src="'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" v-else></el-avatar>
             </template>
-            <el-menu-item index="4-1">个人资料</el-menu-item>
+            <el-menu-item index="mine">个人资料</el-menu-item>
             <el-menu-item index="4-2">管理信息</el-menu-item>
             <el-menu-item @click="sendLoginOut" index="">退出登录</el-menu-item>
           </el-submenu>
@@ -96,6 +96,14 @@
       }
     },
     methods: {
+      toTotal(i){
+        console.log(i);
+        this.$api('/api/clicksAddInfo','post',{
+          id:i
+        }).then(res=>{
+          console.log(res)
+        })
+      },
       sendLoginOut(){
         this.$api('/api/loginOut',
           'POST',
