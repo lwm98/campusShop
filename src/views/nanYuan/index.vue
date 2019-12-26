@@ -132,20 +132,20 @@
         noticeVisible: false,
 
         shopInfo: {
-          img: ['/static/img/blog-item1.jpg', '/static/img/blog-item1.jpg', '/static/img/blog-item1.jpg'],
-          name: 'Q宝宝',
-          date: 'MAY 24,2015',
-          comment: 99,
+          img: ['', '', ''],
+          name: '',
+          date: '',
+          comment: '',
           desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and ...",
-          contact: '陈老师',
-          tel: '13192563375',
-          address: '南苑6栋楼下爱时尚内',
-          serviceTime: '10：00-22：55',
+            "",
+          contact: '',
+          tel: '',
+          address: '',
+          serviceTime: '',
           notice:
-            '本店专注菜品口味的更新，简单有滋味，感恩回馈新老顾客，顾隆重推出多款优惠菜品！如果您的美食凉了，或者口味不好，错送，漏送等，第一时间联系我们，如您对我们的送餐服务，口味满意请给个五星好评哦！您们的五星好评就是我们的动力！！',
-          menu: ['/static/img/new/menu1.jpg', '/static/img/new/menu2.jpg'],
-          voucher: ['/static/img/new/pinzheng1.jpg', '/static/img/new/pinzheng2.jpg']
+            '',
+          menu: ['', ''],
+          voucher: ['', '']
         },
         activityInfo: [
           {
@@ -169,14 +169,14 @@
         ],
         newsInfo: [
           {
-            newsId:1,
-            img: '/static/img/new/commentImg.jpg',
-            title: '实名推荐这个薯条 十分好吃！！不吃血亏！！！',
-            desc:'你们吃过吗 今天那个薯条特别特别好吃！强烈推荐啊啊啊',
-            userId: '电音之王克里斯吴',
-            watch: '7000',
-            comments: '788',
-            date: '2019/12/20 17:11'
+            newsId:'',
+            img: '',
+            title: '',
+            desc:'',
+            userId: '',
+            watch: '',
+            comments: '',
+            date: ''
           },{
             newsId:2,
             img: '/static/img/new/commentImg1.jpg',
@@ -195,7 +195,7 @@
             children: [
               {
                 label: 'Q堡堡',
-                value:'10011'
+                value:'3001'
               },
               {
                 label:'张亮麻辣烫'

@@ -87,7 +87,7 @@
                   <el-input  size="small"  placeholder="请输入回复内容" v-model="content"
                              style="width:200px;margin-top:10px;">
                   </el-input>
-                  <el-button icon="el-icon-edit" style="padding: 5px;height: 20px;line-height: 20px" type="warning">回复</el-button>
+                  <el-button icon="el-icon-edit" style="padding: 5px;height: 31px;line-height: 20px" type="warning">回复</el-button>
                 </div>
               </el-col>
             </el-col>

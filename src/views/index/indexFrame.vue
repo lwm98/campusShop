@@ -23,7 +23,7 @@
       :visible.sync="registerDialogVisible"
       width="30%"
       center>
-      <el-form label-width="80px" :model="registerFormData">
+      <el-form label-width="45px" :model="registerFormData">
         <el-form-item label="账号">
           <el-input v-model="registerFormData.name" required></el-input>
         </el-form-item>
