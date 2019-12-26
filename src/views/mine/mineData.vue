@@ -66,7 +66,7 @@
           state: false, //存放公开状态 false 对应 0 ，true 对应 1
           routerName:'',
           imagedata:{
-            type:4
+            type:1
           }
         }
       },
@@ -84,7 +84,7 @@
           console.log(URL.createObjectURL(file.raw));
           console.log(res);
           if (res.code == 0){
-            this.userInfo.image = 'http://localhost:8080' + res.msg
+            this.userInfo.image = res.msg
           }
         },
         beforeAvatarUpload(file) {
@@ -117,7 +117,10 @@
           autograph:this.userInfo.autograph,
           real_name:this.userInfo.real_name
           }).then(res=>{
-            console.log(res)
+            console.log(res);
+            if (res.updateUser == 'true'){
+              window.localStorage.setItem('userData', JSON.stringify(this.userInfo));
+            }
           })
         }
       }

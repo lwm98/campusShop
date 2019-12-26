@@ -112,6 +112,7 @@
           console.log(res);
           window.localStorage.setItem('userData', '');
           this.userInfo = '';
+          this.$router.push({path:'/'});
           this.$notify({
             title: '成功',
             message: '已成功退出登录',
