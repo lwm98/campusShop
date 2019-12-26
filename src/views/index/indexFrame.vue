@@ -7,10 +7,10 @@
       center>
         <el-form label-width="45px" :model="loginFormData" label-position="left">
           <el-form-item label="账号">
-            <el-input v-model="loginFormData.id" required></el-input>
+            <el-input v-model="loginFormData.id" :required="true"></el-input>
           </el-form-item>
           <el-form-item label="密码">
-            <el-input v-model="loginFormData.password" required></el-input>
+            <el-input v-model="loginFormData.password" :required="true"></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -110,7 +110,7 @@
           {
           }).then(res=>{
           console.log(res);
-          this.userInfo = '';
+          this.$userInfo = this.userInfo = '';
           this.$notify({
             title: '成功',
             message: '已成功退出登录',
@@ -134,7 +134,7 @@
           }).then(res=>{
           console.log(res);
           if (res.register == 'true'){
-            this.userInfo = res.User;
+            this.$userInfo = this.userInfo = res.User;
             this.registerDialogVisible = false;
             this.$notify({
               title: '注册成功',
@@ -153,7 +153,7 @@
             }).then(res=>{
               console.log(res);
               if (res.login == 'true') {
-                this.userInfo = res.User;
+                this.$userInfo = this.userInfo = res.User;
                 this.loginDialogVisible = false;
                 this.$notify({
                   title: '登录成功',

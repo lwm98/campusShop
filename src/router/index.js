@@ -29,6 +29,7 @@ export default new Router({
           path:'mine',
           name: '我的资料',
           component:mine,
+          redirect: '/mine/index',
           children: [{
             path:'index',
             component:mineIndex,

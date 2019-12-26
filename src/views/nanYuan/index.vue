@@ -117,7 +117,6 @@
           </el-tab-pane>
           <el-tab-pane label="联系我们" name="fourth">联系我们</el-tab-pane>
         </el-tabs>
-          <router-view></router-view>
       </div>
     </div>
     <!--      <my-footer></my-footer>-->
