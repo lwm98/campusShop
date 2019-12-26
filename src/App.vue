@@ -25,7 +25,9 @@ a{
 i{
   font-style: normal;
 }
-
+.el-form-item__content{
+  text-align: left;
+}
 .el-dialog__body,.el-dialog--center .el-dialog__body{
   padding: 20px 70px;
 }

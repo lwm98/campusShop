@@ -1,12 +1,12 @@
 <template>
   <div class="mineIndex">
     <div data-v-10e3258d="" class="home-head">
-      <img data-v-10e3258d="" src="https://i1.hdslb.com/bfs/face/5a372757797fa8db172da39743b4ed72b3597635.jpg" />
+      <el-image :src="userInfo.image"></el-image>
     </div>
-    <div><span class="home-top-msg-name">电音之王克里斯</span><span class="home-userstatus">正式会员</span></div>
+    <div><span class="home-top-msg-name">{{userInfo.name}}</span><span class="home-userstatus">正式会员</span></div>
     <div style="margin-top: 75px">
       <router-link to="/mine/data" tag="span" class="home-to-update">修改资料</router-link>
-      <a href="//space.bilibili.com/177158455/" class="home-to-space">
+      <a href="#" class="home-to-space">
       个人空间
       <i class="el-icon-arrow-right"></i></a>
     </div>
@@ -15,7 +15,15 @@
 
 <script>
   export default {
-    name: 'mineIndex'
+    name: 'mineIndex',
+    data(){
+      return{
+        userInfo:''
+      }
+    },
+    created() {
+      this.userInfo = JSON.parse(window.localStorage.getItem('userData'));
+    }
   };
 </script>
 

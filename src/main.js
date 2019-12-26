@@ -6,7 +6,6 @@ import router from './router'
 
 import api from './components/api'
 Vue.prototype.$api = api.MyRequest;
-Vue.prototype.$userInfo = '';
 
 Vue.config.productionTip = false;
 import ElementUI from 'element-ui';

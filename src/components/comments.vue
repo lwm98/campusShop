@@ -145,7 +145,11 @@
     },
       created() {
           this.newsId = this.$route.params.id;
-
+          this.$api('/api/getCommentInfo','POST',{
+            news_id: 5001
+          }).then(res=>{
+            console.log(res)
+          })
       },
       methods:{
           toGood(){

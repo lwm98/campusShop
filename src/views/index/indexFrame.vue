@@ -110,7 +110,8 @@
           {
           }).then(res=>{
           console.log(res);
-          this.$userInfo = this.userInfo = '';
+          window.localStorage.setItem('userData', '');
+          this.userInfo = '';
           this.$notify({
             title: '成功',
             message: '已成功退出登录',
@@ -134,7 +135,8 @@
           }).then(res=>{
           console.log(res);
           if (res.register == 'true'){
-            this.$userInfo = this.userInfo = res.User;
+            this.userInfo = res.User;
+            window.localStorage.setItem('userData', JSON.stringify(res.User));
             this.registerDialogVisible = false;
             this.$notify({
               title: '注册成功',
@@ -151,9 +153,10 @@
               name:this.loginFormData.id,
               password:this.loginFormData.password
             }).then(res=>{
-              console.log(res);
               if (res.login == 'true') {
-                this.$userInfo = this.userInfo = res.User;
+                this.userInfo = res.User;
+                window.localStorage.setItem('userData', JSON.stringify(res.User));
+                console.log(res);
                 this.loginDialogVisible = false;
                 this.$notify({
                   title: '登录成功',
@@ -176,11 +179,18 @@
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       }
+    },
+    created() {
+      let u = window.localStorage.getItem('userData');
+      if (u != '' || u != null){
+        this.userInfo = JSON.parse(u);
+      }
     }
   }
 </script>
 
 <style scoped lang="scss">
+
   a {
     text-decoration: none;
   }

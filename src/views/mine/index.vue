@@ -34,6 +34,7 @@
   color: #717171;
   font-size: 12px;
   font-family: MicrosoftYaHei;
+
 }
   .security_content {
     overflow: hidden;
