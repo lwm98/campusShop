@@ -84,7 +84,8 @@
           console.log(URL.createObjectURL(file.raw));
           console.log(res);
           if (res.code == 0){
-            this.userInfo.image = res.msg
+            this.userInfo.image = res.msg;
+            console.log(this.$root.userConData)
           }
         },
         beforeAvatarUpload(file) {
@@ -120,6 +121,11 @@
             console.log(res);
             if (res.updateUser == 'true'){
               window.localStorage.setItem('userData', JSON.stringify(this.userInfo));
+              this.$notify({
+                title: '修改成功',
+                message: '已成功修改',
+                type: 'success'
+              });
             }
           })
         }

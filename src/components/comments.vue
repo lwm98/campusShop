@@ -15,10 +15,10 @@
               <el-col :span="8">
                 <div class="commentUser">
                   <div class="headImg">                  <div class="flag"></div>
-                    <el-image :src="userInfo.userHead"></el-image></div>
+                    <el-image :src="userInfo.image"></el-image></div>
                 </div>
-                <h5 style="font-weight: 400;font-size: 20px;margin: 0;margin-top: 16px;color:#2d64b3;">{{userInfo.userName}}
-                  ( {{userInfo.userId}} )
+                <h5 style="font-weight: 400;font-size: 20px;margin: 0;margin-top: 16px;color:#2d64b3;">{{userInfo.name}}
+                  ( {{userInfo.id}} )
                   <i v-if="userInfo.sex=='男'" class="el-icon-male" style="color:blue"></i>
                   <i v-if="userInfo.sex=='女'" class="el-icon-female" style="color:deeppink"></i>
                 </h5>
@@ -40,17 +40,6 @@
               </el-col>
             </el-row>
           </div>
-          <el-dialog
-            title="请输入评论"
-            :visible.sync="commentDialog"
-            width="50%"
-            center>
-            <span>需要注意的是内容是默认不居中的</span>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="centerDialogVisible = false">评 论</el-button>
-              <el-button type="primary" @click="commentDialog = false">取 消</el-button>
-            </span>
-          </el-dialog>
           <h4> 评 论 {{comment.length}} 条</h4>
           <el-divider></el-divider>
           <el-row class="comment" style="margin-top:20px;"
@@ -87,7 +76,7 @@
                   <el-input  size="small"  placeholder="请输入回复内容" v-model="content"
                              style="width:200px;margin-top:10px;">
                   </el-input>
-                  <el-button icon="el-icon-edit" style="padding: 5px;height: 31px;line-height: 20px" type="warning">回复</el-button>
+                  <el-button icon="el-icon-edit" style="padding: 5px;height: 31px;line-height: 20px" type="warning" @click="replyCom(item.id,item.user_id)">回复</el-button>
                 </div>
               </el-col>
             </el-col>
@@ -95,6 +84,22 @@
           <!-- /.comment-->
         </div>
       </div>
+      <el-dialog
+        title="提示"
+        :visible.sync="newCommentDialog"
+        width="50%"
+        center>
+        <el-input
+          type="textarea"
+          :rows="2"
+          placeholder="请输入评论内容"
+          v-model="commentContent">
+        </el-input>
+        <span slot="footer" class="dialog-footer">
+        <el-button @click="newCommentDialog = false">取 消</el-button>
+        <el-button type="primary" @click="addComment">确 定</el-button>
+      </span>
+      </el-dialog>
     </div>
 </template>
 
@@ -103,16 +108,14 @@
         name: "comments",
       data(){
           return{
-            commentDialog:false,
+            commentContent:'',
+            newCommentDialog:false,
+            news_id:5001,
             content:'', //回复
             activeNames:[''],//
             newsId:'',
-            userInfo:{
-              userId:1,
-              userName:'lwm',
-              sex:'男',
-              userHead:'http://pics.sc.chinaz.com/files/pic/pic9/201903/bpic10784.jpg',
-            },
+            louzhuInfo:'',
+            userInfo:{},
             newsInfo:{
               newsId:1,
               img: '/static/img/new/commentImg.jpg',
@@ -123,35 +126,58 @@
               comments: '788',
               date: '2019/12/20 17:11'
             },
-            comment:[{
-              id: 4,
-              name: "k",
-              real_name: "锴哥",
-              sex: "男",
-              image:'http://pics.sc.chinaz.com/files/pic/pic9/201903/bpic10784.jpg',
-              create_time:'2019-11-20 00:28:59',
-              content:'我是你儿子',
-              commentExts:[{
-                content: "我是你儿子",
-                create_time: "2019-11-20 00:28:59",
-                image: "http://pics.sc.chinaz.com/files/pic/pic9/201903/bpic10784.jpg",
-                real_name: "狗杰松",
-                reply_id: 13,
-                reply_image: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576221579762&di=00ed9cc3bbb29c4c7693c8d0be8ad3ae&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201402%2F07%2F20140207132418_RztHk.thumb.1600_0.jpeg",
-                reply_real_name: "锴哥"
-              }]
-            }],
+            comment:[],
           }
     },
       created() {
-          this.newsId = this.$route.params.id;
-          this.$api('/api/getCommentInfo','POST',{
-            news_id: 5001
-          }).then(res=>{
-            console.log(res)
-          })
+        this.getCommentInfo();
+        let u = window.localStorage.getItem('userData');
+        if (u != '' || u != null){
+          this.userInfo = JSON.parse(u);
+          // console.log(this.userInfo)
+        }
       },
       methods:{
+          getCommentInfo(){
+            this.newsId = this.$route.params.id;
+            this.$api('/api/getCommentInfo','POST',{
+              news_id: 5001
+            }).then(res=>{
+              console.log(res);
+              if (res.code == 0) {
+                this.comment = res.data;
+              }
+            });
+          },
+          addComment(){
+            this.newCommentDialog = true;
+            this.$api('/api/sendCommentInfo','POST',{
+              news_id:this.news_id,
+              content:this.commentContent,
+              userId: this.userInfo.id,
+            }).then(res=>{
+              console.log(res);
+              this.newCommentDialog = false;
+              this.$notify({
+                title: '评论成功',
+                message: '这是一条成功的提示消息',
+                type: 'success'
+              });
+              this.getCommentInfo()
+            })
+          },
+        replyCom(pid,commentid){
+          this.$api('/api/sendCommentInfo','POST',{
+            news_id:this.news_id,
+            content:this.content,
+            pid:pid,
+            reply_id:commentid,
+            userId: this.userInfo.id,
+          }).then(res=>{
+            console.log(res);
+            this.getCommentInfo()
+          })
+        },
           toGood(){
             this.$notify({
               title: '点赞成功',
@@ -160,7 +186,7 @@
             });
           },
         commentMethod(){
-            this.commentDialog = true;
+            this.newCommentDialog = true;
         },
         toShare(){
           this.$notify({

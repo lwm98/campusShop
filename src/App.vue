@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data:{
+    userConData:{
+      img:'/static/img/new/menu1.jpg'
+    }
+  }
 }
 </script>
 
