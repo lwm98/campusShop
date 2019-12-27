@@ -155,23 +155,23 @@
         ],
         newsInfo: [
           {
-            newsId:'',
-            img: '',
-            title: '',
-            desc:'',
-            userId: '',
-            watch: '',
-            comments: '',
-            date: ''
+            newsId:1,
+            img: '/static/img/new/commentImg1.jpg',
+            title: 'q宝宝终极难吃 建议倒闭',
+            desc:'妈的一吃就吐，十分好吃。谁吃谁知道',
+            userId: '电音之王克里斯吴',
+            watch: '45345',
+            comments: '78',
+            date: '2019/12/25 15:11'
           },{
             newsId:2,
-            img: '/static/img/new/commentImg1.jpg',
+            img: '/static/img/new/commentImg.jpg',
             title: '今天的鸡翅也非常不错！你们吃了吗',
             desc:'你们吃过吗 今天那个薯条特别特别好吃！强烈推荐啊啊啊',
             userId: '电音之王克里斯吴',
             watch: '7000',
             comments: '788',
-            date: '2019/12/20 17:11'
+            date: '2019/12/23 17:11'
           }
         ],
 

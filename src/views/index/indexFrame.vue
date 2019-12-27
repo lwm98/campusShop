@@ -58,7 +58,7 @@
               <el-avatar :size="30" :src="userInfo.image" v-if="userInfo.image"></el-avatar>
               <el-avatar :size="30" :src="'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" v-else></el-avatar>
             </template>
-            <el-menu-item index="mine">个人资料</el-menu-item>
+            <el-menu-item index="/mine">个人资料</el-menu-item>
             <el-menu-item index="4-2">管理信息</el-menu-item>
             <el-menu-item @click="sendLoginOut" index="">退出登录</el-menu-item>
           </el-submenu>
