@@ -17,9 +17,18 @@ import myfooter from './components/footer'
 Vue.component('my-footer',myfooter);
 import mineTitle from './components/mineTitle'
 Vue.component('mineTitle',mineTitle);
+
 new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
+});
+
+router.beforeEach((to,from,next)=>{
+  if (to.name) {
+    document.title = to.name;
+    console.log(to)
+  }
+  next();
 });

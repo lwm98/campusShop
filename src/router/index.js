@@ -33,7 +33,7 @@ export default new Router({
           children: [{
             path:'index',
             component:mineIndex,
-            name:'首页'
+            name:'个人资料'
           },
             {
               path:'data',
@@ -71,7 +71,7 @@ export default new Router({
         },
         {
           path: 'index',
-          name: '首页内容',
+          name: '首页',
           component: indexContent
         },
         {
