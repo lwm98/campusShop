@@ -80,7 +80,7 @@
     name: "index",
     data() {
       return {
-        userInfo:'',
+        userInfo:{},
         registerFormData:{
           password:'',
           name:'',
@@ -181,7 +181,7 @@
         console.log(key, keyPath);
       }
     },
-    created() {
+    mounted() {
       let u = window.localStorage.getItem('userData');
       if (u != '' || u != null){
         this.userInfo = JSON.parse(u);
