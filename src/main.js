@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import api from './components/api'
+import api from './http/api'
 Vue.prototype.$api = api.MyRequest;
 
 Vue.config.productionTip = false;
