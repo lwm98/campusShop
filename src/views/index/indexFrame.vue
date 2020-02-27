@@ -7,10 +7,10 @@
       center>
         <el-form label-width="45px" :model="loginFormData" label-position="left">
           <el-form-item label="账号">
-            <el-input v-model="loginFormData.id" :required="true"></el-input>
+            <el-input v-model="loginFormData.id" :required="true" autofocus></el-input>
           </el-form-item>
           <el-form-item label="密码">
-            <el-input v-model="loginFormData.password" :required="true"></el-input>
+            <el-input v-model="loginFormData.password" :required="true" clearable show-password></el-input>
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -53,7 +53,7 @@
           <el-button icon="el-icon-search" circle></el-button>
           <el-button type="primary" plain @click="toLogin" v-if="userInfo == ''">登录</el-button>
           <el-button type="primary" plain @click="toRegister" v-if="userInfo == ''">注册</el-button>
-          <el-submenu v-else index="">
+          <el-submenu index="" v-else>
             <template slot="title">
               <el-avatar :size="30" :src="userInfo.image" v-if="userInfo.image"></el-avatar>
               <el-avatar :size="30" :src="'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'" v-else></el-avatar>
@@ -80,7 +80,7 @@
     name: "index",
     data() {
       return {
-        userInfo:{},
+        userInfo: '',
         registerFormData:{
           password:'',
           name:'',
@@ -110,7 +110,7 @@
           {
           }).then(res=>{
           console.log(res);
-          window.localStorage.setItem('userData', '');
+          window.localStorage.removeItem('userData');
           this.userInfo = '';
           this.$router.push({path:'/'});
           this.$notify({
@@ -181,10 +181,16 @@
         console.log(key, keyPath);
       }
     },
-    mounted() {
+    created() {
       let u = window.localStorage.getItem('userData');
-      if (u != '' || u != null){
+      console.log(u);
+      if (u === ''|| u === null || u === ' '){
+        this.userInfo = '';
+        // console.log("aaa")
+        console.log("没值")
+      }else {
         this.userInfo = JSON.parse(u);
+        console.log("有值")
       }
     }
   }

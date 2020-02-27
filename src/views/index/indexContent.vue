@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
+<!--    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>-->
     <div class="headline text-center title">
       <el-row >
         <el-col :span="12" :offset="6">
@@ -87,14 +87,7 @@
       // })
     },
     mounted() {
-      for (let i in document.getElementsByClassName('item-image')) {
-        document.getElementsByClassName('item-image')[i].addEventListener('mousemove',function () {
-          document.getElementsByClassName('mask')[i].style.display = 'flex';
-        });
-        document.getElementsByClassName('item-image')[i].addEventListener('mouseout',function () {
-          document.getElementsByClassName('mask')[i].style.display = 'none';
-        })
-      }
+
     },
     methods:{
       toTotal(i){
@@ -202,7 +195,7 @@
     text-transform: capitalize;
     word-spacing: 1px;
   }
-  .page-component__scroll .el-scrollbar__wrap{
-    overflow-x: hidden;
-  }
+  /*.page-component__scroll .el-scrollbar__wrap{*/
+  /*  overflow-x: hidden;*/
+  /*}*/
 </style>
