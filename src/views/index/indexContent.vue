@@ -117,6 +117,11 @@
   /*  border-radius: 10px;*/
   /*  background: #EDEDED;*/
   /*}*/
+  .portfolio-item:hover .mask{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
     .mask{
     height: 100%;
     width: 100%;
@@ -131,7 +136,7 @@
         animation-delay:0.8s;
         -webkit-animation-delay:0.8s; /* Safari 和 Chrome */
       }
-      margin: 0 auto;
+      /*margin: auto auto;*/
       font-size: 3em;
       color: white;
       i{

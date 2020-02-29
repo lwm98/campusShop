@@ -2,10 +2,15 @@
     <div class="mycomment">
       <el-row>
         <el-col :span="24" class="breadcrumb">
-          <ol>
-            <li><span class="title">评论</span></li>
-            <li><span class="desc">查看评论</span></li>
-          </ol>
+          <div style="position: relative;">
+            <div class="back" style="" @click="$router.go(-1)">
+              <i class="el-icon-back" style="font-size: 24px;font-weight: 500;color: white;"></i>
+            </div>
+            <ol>
+              <li><span class="title">评论</span></li>
+              <li><span class="desc">查看评论</span></li>
+            </ol>
+          </div>
         </el-col>
       </el-row>
       <div id="details" class="box">
@@ -204,6 +209,15 @@
   .mycomment{
     background-color: #f9f9f9;
     .breadcrumb{
+      .back{
+        box-sizing:border-box;
+        position: absolute;
+        top: 50%;
+        margin-top: -12.4px;
+        border: 1px solid white;
+        border-radius: 50%;
+        cursor: pointer;
+      }
       ol{
         margin: 0;
         padding: 0;
@@ -219,7 +233,7 @@
         font-size: 15px;
         color: #c7c4c0;
       }
-      background: url('/static/img/multiple_blog-bg.jpg');
+      background: url('/static/img/slider2.jpg');
       padding: 15px;
     }
   }
