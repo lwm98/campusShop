@@ -14,15 +14,21 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   export default {
     name: 'mineIndex',
     data(){
       return{
-        userInfo:''
+        // userInfo:''
       }
     },
+    computed:{
+      ...mapState({
+        userInfo: state => state.user.userInfo
+      })
+    },
     created() {
-      this.userInfo = JSON.parse(window.localStorage.getItem('userData'));
+      // this.userInfo = JSON.parse(window.localStorage.getItem('userData'));
     }
   };
 </script>

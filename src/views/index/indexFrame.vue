@@ -51,8 +51,8 @@
           </el-submenu>
           <el-input type="primary" placeholder="请输入你想查询的店铺" style="width: 200px;margin-right: 20px;margin-left: 10px;"></el-input>
           <el-button icon="el-icon-search" circle></el-button>
-          <el-button type="primary" plain @click="toLogin" v-if="userInfo == ''">登录</el-button>
-          <el-button type="primary" plain @click="toRegister" v-if="userInfo == ''">注册</el-button>
+          <el-button type="primary" plain @click="toLogin" v-if="userInfo == null||userInfo.id == undefined">登录</el-button>
+          <el-button type="primary" plain @click="toRegister" v-if="userInfo == null||userInfo.id == undefined">注册</el-button>
           <el-submenu index="" v-else>
             <template slot="title">
               <el-avatar :size="30" :src="userInfo.image" v-if="userInfo.image"></el-avatar>
@@ -76,11 +76,11 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   export default {
     name: "index",
     data() {
       return {
-        userInfo: '',
         registerFormData:{
           password:'',
           name:'',
@@ -92,7 +92,7 @@
         },
         registerDialogVisible:false,
         loginDialogVisible:false,
-        activeIndex: '1',
+        activeIndex: '/',
       }
     },
     methods: {
@@ -107,11 +107,11 @@
       sendLoginOut(){
         this.$api('/api/loginOut',
           'POST',
-          {
-          }).then(res=>{
+          {}).then(res=>{
           console.log(res);
-          window.localStorage.removeItem('userData');
-          this.userInfo = '';
+          // window.localStorage.removeItem('userData');
+          // this.userInfo = '';
+          this.$store.commit("user/CLEAR_USER");
           this.$router.push({path:'/'});
           this.$notify({
             title: '成功',
@@ -137,7 +137,8 @@
           console.log(res);
           if (res.register == 'true'){
             this.userInfo = res.User;
-            window.localStorage.setItem('userData', JSON.stringify(res.User));
+            // window.localStorage.setItem('userData', JSON.stringify(res.User));
+            this.$store.commit('user/INIT_USER',res.User);
             this.registerDialogVisible = false;
             this.$notify({
               title: '注册成功',
@@ -155,9 +156,10 @@
               password:this.loginFormData.password
             }).then(res=>{
               if (res.login == 'true') {
-                this.userInfo = res.User;
-                window.localStorage.setItem('userData', JSON.stringify(res.User));
-                console.log(res);
+                this.$store.commit("user/INIT_USER",res.User);
+                // this.userInfo = res.User;
+                // window.localStorage.setItem('userData', JSON.stringify(res.User));
+                // console.log(res);
                 this.loginDialogVisible = false;
                 this.$notify({
                   title: '登录成功',
@@ -181,17 +183,14 @@
         console.log(key, keyPath);
       }
     },
+    computed: {
+      ...mapState({
+        userInfo: state => state.user.userInfo
+      })
+    },
     created() {
-      let u = window.localStorage.getItem('userData');
-      console.log(u);
-      if (u === ''|| u === null || u === ' '){
-        this.userInfo = '';
-        // console.log("aaa")
-        console.log("没值")
-      }else {
-        this.userInfo = JSON.parse(u);
-        console.log("有值")
-      }
+      let u = window.localStorage.getItem('user');
+      this.$store.commit("user/INIT_USER",JSON.parse(u));
     }
   }
 </script>

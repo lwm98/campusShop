@@ -2,11 +2,11 @@ import Vue from 'vue'
 import vuex from 'vuex';
 Vue.use(vuex);
 
-import userInfo from './module/userInfo'
+import user from './module/userInfo'
 
 const store = new vuex.Store({
   modules:{
-    userInfo
+    user
   }
 });
 

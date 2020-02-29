@@ -57,14 +57,15 @@
 
 <script>
   import axios from 'axios';
+  import { mapState } from 'vuex';
     export default {
         name: "mineData",
       data() {
         return {
           uploadIMGurl:"",
-          userInfo:{
-            image:''
-          },
+          // userInfo:{
+          //   image:''
+          // },
           state: false, //存放公开状态 false 对应 0 ，true 对应 1
           routerName:'',
           imagedata:{
@@ -72,10 +73,16 @@
           }
         }
       },
+      computed:{
+        ...mapState({
+          userInfo: state => state.user.userInfo
+        })
+      },
       created(){
         this.uploadIMGurl = axios.defaults.baseURL+ '/api/upUserImage';
         this.routerName = this.$route.name;
-        this.userInfo = JSON.parse(window.localStorage.getItem('userData'))
+
+        // this.userInfo = JSON.parse(window.localStorage.getItem('userData'))
         if (this.userInfo.information_state == 1) {
           this.state = true
         }else {
@@ -88,7 +95,7 @@
           console.log(res);
           if (res.code == 0){
             this.userInfo.image = res.msg;
-            console.log(this.$root.userConData)
+            // console.log(this.$root.userConData)
           }
         },
         beforeAvatarUpload(file) {
@@ -121,9 +128,13 @@
           autograph:this.userInfo.autograph,
           real_name:this.userInfo.real_name
           }).then(res=>{
+            console.log("+++")
             console.log(res);
+            console.log("+++")
+
             if (res.updateUser == 'true'){
-              window.localStorage.setItem('userData', JSON.stringify(this.userInfo));
+              // window.localStorage.setItem('userData', JSON.stringify(this.userInfo));
+              this.$store.commit('user/INIT_USER',this.userInfo);
               this.$notify({
                 title: '修改成功',
                 message: '已成功修改',
