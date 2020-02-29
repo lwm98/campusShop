@@ -1,4 +1,4 @@
-import axios from 'axios/index';
+import axios from 'axios';
 /*
  * 封装axios
  */
@@ -6,9 +6,9 @@ switch (process.env.NODE_ENV) {
   case "production":
     axios.defaults.baseURL = "";
   case "testing":
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'http://localhost:4399';
   default:
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'http://localhost:4399';
 }
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN; //这是token
 axios.defaults.timeout = 10000;
@@ -30,7 +30,6 @@ axios.interceptors.request.use(config =>{
 /*
  * 响应拦截器
  */
-
 
 let MyRequest = function (api,method,data){
   console.log("调用接口");

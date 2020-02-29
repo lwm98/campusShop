@@ -5,7 +5,7 @@
         <div style="margin-bottom: 25px">
           <el-upload
             class="avatar-uploader"
-            action="http://localhost:8080/api/upUserImage"
+            :action="uploadIMGurl"
             :show-file-list="false"
             :auto-upload="true"
             name="fileName"
@@ -56,10 +56,12 @@
 </template>
 
 <script>
+  import axios from 'axios';
     export default {
         name: "mineData",
       data() {
         return {
+          uploadIMGurl:"",
           userInfo:{
             image:''
           },
@@ -71,6 +73,7 @@
         }
       },
       created(){
+        this.uploadIMGurl = axios.defaults.baseURL+ '/api/upUserImage';
         this.routerName = this.$route.name;
         this.userInfo = JSON.parse(window.localStorage.getItem('userData'))
         if (this.userInfo.information_state == 1) {
