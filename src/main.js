@@ -18,6 +18,8 @@ Vue.component('my-footer',myfooter);
 import mineTitle from './components/mineTitle'
 Vue.component('mineTitle',mineTitle);
 
+import nprogress from 'nprogress';
+import 'nprogress/nprogress.css'
 /*
  * 引入vuex
  */
@@ -32,9 +34,13 @@ new Vue({
 });
 
 router.beforeEach((to,from,next)=>{
+  nprogress.start();
   if (to.name) {
     document.title = to.name;
     console.log(to)
   }
   next();
+});
+router.afterEach((to,from,next)=>{
+  nprogress.done();
 });

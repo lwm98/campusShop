@@ -60,6 +60,7 @@
           :router="true"
         >
           <el-menu-item index="/">首页</el-menu-item>
+          <el-menu-item index="/news">资讯</el-menu-item>
           <el-submenu index="2">
             <template slot="title">选择商区</template>
             <el-menu-item index="/yaYuan" @click.native="toTotal(0)"
