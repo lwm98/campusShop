@@ -18,9 +18,15 @@ Vue.component('my-footer',myfooter);
 import mineTitle from './components/mineTitle'
 Vue.component('mineTitle',mineTitle);
 
+/*
+ * 引入vuex
+ */
+import store from './store/index'
+
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 });
