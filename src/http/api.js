@@ -18,12 +18,12 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 /*
  * 请求拦截器
  */
-axios.interceptors.request.use(config =>{
+axios.interceptors.request.use(config => {
   //token校验
   const token = window.localStorage.getItem('token');
   token && (config.headers.Authorization = token);
   return config;
-},error => {
+}, error => {
   return Promise.reject(error)
 });
 
@@ -31,21 +31,21 @@ axios.interceptors.request.use(config =>{
  * 响应拦截器
  */
 
-let MyRequest = function (api,method,data){
+let MyRequest = function (api, method, data) {
   console.log("调用接口");
   console.log(data);
-  return new Promise((resolve,reject)=>{
+  return new Promise((resolve, reject) => {
     axios({
-      url:api,
-      params:data,
-      method:method
-    }).then(res=>{
+      url: api,
+      params: data,
+      method: method
+    }).then(res => {
       resolve(res.data)
-    }).catch(res=>{
+    }).catch(res => {
       reject(res)
     })
   })
 };
-export default{
+export default {
   MyRequest
 }

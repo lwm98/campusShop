@@ -21,39 +21,39 @@
 </template>
 
 <script>
-    export default {
-        name: "footer"
-    }
+export default {
+  name: "footer"
+};
 </script>
 
 <style scoped lang="scss">
-  .el-footer{
-    position: fixed;
-    bottom: 0;
-    background-color: #2d2d2d;
-    color: #6B6B6B;
-    min-height: 8%;
-    width: 100%;
-    .mycenter{
-      margin: 0 auto;
-      padding: 0 15px;
-      height: 100%;
+.el-footer {
+  position: fixed;
+  bottom: 0;
+  background-color: #2d2d2d;
+  color: #6b6b6b;
+  min-height: 8%;
+  width: 100%;
+  .mycenter {
+    margin: 0 auto;
+    padding: 0 15px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    .headerBrand {
       display: flex;
-      justify-content: space-between;
-      .headerBrand{
+      align-items: center;
+      font-size: 12px;
+      ul {
+        line-height: 100%;
+        margin: 0;
         display: flex;
-        align-items: center;
-        font-size: 12px;
-        ul{
-          line-height: 100%;
-          margin: 0;
-          display: flex;
-          list-style: none;
-          li{
-            padding: 0 15px;
-          }
+        list-style: none;
+        li {
+          padding: 0 15px;
         }
       }
     }
   }
+}
 </style>
