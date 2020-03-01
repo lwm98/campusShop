@@ -176,38 +176,49 @@ export default {
     return {
       commentContent: "",
       newCommentDialog: false,
-      news_id: 5001,
+      news_id: "",
       content: "", //回复
       activeNames: [""], //
       newsId: "",
       louzhuInfo: "",
       userInfo: {},
       newsInfo: {
-        newsId: 1,
-        img: "/static/img/new/commentImg.jpg",
-        title: "实名推荐这个薯条 十分好吃！！不吃血亏！！！",
-        desc: "你们吃过吗 今天那个薯条特别特别好吃！强烈推荐啊啊啊",
-        userId: "电音之王克里斯吴",
-        watch: "7000",
-        comments: "788",
-        date: "2019/12/20 17:11"
+        // id: 1,
+        // img: "/static/img/new/commentImg.jpg",
+        // title: "实名推荐这个薯条 十分好吃！！不吃血亏！！！",
+        // desc: "你们吃过吗 今天那个薯条特别特别好吃！强烈推荐啊啊啊",
+        // userId: "电音之王克里斯吴",
+        // watch: "7000",
+        // comments: "788",
+        // date: "2019/12/20 17:11"
       },
       comment: []
     };
   },
   created() {
     this.getCommentInfo();
-    let u = window.localStorage.getItem("userData");
-    if (u != "" || u != null) {
-      this.userInfo = JSON.parse(u);
-      // console.log(this.userInfo)
-    }
+    this.getNewInfo();
+    // let u = window.localStorage.getItem("userData");
+    // if (u != "" || u != null) {
+    //   this.userInfo = JSON.parse(u);
+    //   // console.log(this.userInfo)
+    // }
   },
   methods: {
+    async getNewInfo() {
+      let a = await this.$api("/api/getNews", "GET", {
+        id: this.$route.params.id
+      })
+      this.newsInfo = a.data;
+      let b = await this.$api("/api/getNewsUser","GET",{
+        id: this.newsInfo.userId
+      })
+      this.userInfo = b.data;
+    },
     getCommentInfo() {
       this.newsId = this.$route.params.id;
       this.$api("/api/getCommentInfo", "POST", {
-        news_id: 5001
+        news_id: this.newsId
       }).then(res => {
         console.log(res);
         if (res.code == 0) {

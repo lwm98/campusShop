@@ -63,13 +63,13 @@
           <el-menu-item index="/news">资讯</el-menu-item>
           <el-submenu index="2">
             <template slot="title">选择商区</template>
-            <el-menu-item index="/yaYuan" @click.native="toTotal(0)"
+            <el-menu-item index="/area/1/雅苑" @click.native="toTotal(1)"
               >雅苑区</el-menu-item
             >
-            <el-menu-item index="/boYuan" @click.native="toTotal(1)"
+            <el-menu-item index="/area/2/博苑" @click.native="toTotal(2)"
               >博苑区</el-menu-item
             >
-            <el-menu-item index="/nanYuan" @click.native="toTotal(2)"
+            <el-menu-item index="/area/3/南苑" @click.native="toTotal(3)"
               >南苑区</el-menu-item
             >
           </el-submenu>

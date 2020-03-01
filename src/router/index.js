@@ -2,8 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import indexFrame from "../views/index/indexFrame";
 import indexContent from "../views/index/indexContent";
-import yaYuan from "../views/yaYuan/index";
-import boYuan from "../views/boYuan/index";
+// import yaYuan from "../views/yaYuan/index";
+// import boYuan from "../views/boYuan/index";
 import nanYuan from "../views/nanYuan/index";
 import comment from "../components/comments.vue";
 import mine from "../views/mine/index";
@@ -79,19 +79,19 @@ export default new Router({
           name: "所有资讯",
           component: news
         },
+        // {
+        //   path: "yaYuan",
+        //   name: "雅苑",
+        //   component: yaYuan
+        // },
+        // {
+        //   path: "boYuan",
+        //   name: "博苑",
+        //   component: boYuan
+        // },
         {
-          path: "yaYuan",
-          name: "雅苑",
-          component: yaYuan
-        },
-        {
-          path: "boYuan",
-          name: "博苑",
-          component: boYuan
-        },
-        {
-          path: "nanYuan",
-          name: "南苑",
+          path: "area/:id/:name",
+          name: "商区",
           component: nanYuan
         },
         {

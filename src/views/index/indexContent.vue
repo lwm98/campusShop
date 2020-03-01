@@ -6,7 +6,7 @@
         <el-col :span="12" :offset="6">
           <h2 class="section-title">请选择商区</h2>
           <p class="section-sub-title">
-            本学校有三大商区 分为雅苑、博苑（含东门）、南苑（爱时尚区域）
+            本学校共有如下几个商区
           </p>
           <!-- /.section-sub-title -->
         </el-col>
@@ -18,7 +18,7 @@
           :span="8"
           v-for="(item, index) in areaList"
           :key="index"
-          @click.native="toTotal(index)"
+          @click.native="toTotal(++index)"
         >
           <router-link :to="item.index">
             <div class="portfolio-item">
@@ -30,9 +30,10 @@
                 </div>
                 <a href="#">
                   <img
-                    src="/static/img/portfolio1.jpg"
+                    :src="item.img"
                     class="img-responsive center-block"
                     alt="portfolio1"
+                    style="width:370px;height:261px;"
                   />
                   <div
                     style="display: none; left: 0px; top: 100%; transition: all 300ms ease 0s;"
@@ -49,13 +50,13 @@
                       {{ item.name }}
                     </span>
                     <span class="decoration">
-                      {{ item.hot }}
+                      {{ item.describe }}
                     </span>
                   </el-col>
                   <el-col :span="12">
                     <span class="like">
                       <i class="el-icon-thumb"></i>
-                      {{ item.clickTime }}
+                      {{ item.clicks }}
                     </span>
                   </el-col>
                 </el-row>
@@ -76,34 +77,23 @@ export default {
   name: "content",
   data() {
     return {
-      areaList: [
-        {
-          index: "yaYuan",
-          name: "雅苑",
-          hot: "雅滋味，四饭",
-          clickTime: 666
-        },
-        {
-          index: "boYuan",
-          name: "博苑",
-          hot: "一饭二楼，东门二楼，报刊亭，博苑超市",
-          clickTime: 999
-        },
-        {
-          index: "nanYuan",
-          name: "南苑",
-          hot: "爱时尚，学生超市，胃里果",
-          clickTime: 857
-        }
-      ]
+      areaList: []
     };
   },
   created() {
     // this.$api('','GET',{
     // })
+    this.initArea();
   },
   mounted() {},
   methods: {
+    initArea() {
+      this.$api("/api/getAreaInfo", "GET", {}).then(res => {
+        console.log(res);
+        this.areaList = res.data;
+        console.log(this.areaList);
+      });
+    },
     toTotal(i) {
       console.log(i);
       this.$api("/api/clicksAddInfo", "post", {
