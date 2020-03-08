@@ -371,11 +371,11 @@ export default {
      * 这里开始初始化商区数据
      */
     // console.log(this.$route);
-    this.$api("/api/getArean", "GET", { id: this.$route.params.id }).then(
-      res => {
-        console.log(res.data);
-      }
-    );
+    // this.$api("/api/getArean", "GET", { id: this.$route.params.id }).then(
+    //   res => {
+    //     console.log(res.data);
+    //   }
+    // );
   },
   mounted() {
     setTimeout(() => {

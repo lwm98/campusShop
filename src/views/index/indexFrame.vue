@@ -6,7 +6,11 @@
       width="30%"
       center
     >
-      <el-form label-width="45px" :model="loginFormData" label-position="left">
+      <el-form
+        label-width="4.5rem"
+        :model="loginFormData"
+        label-position="left"
+      >
         <el-form-item label="账号">
           <el-input
             v-model="loginFormData.id"
@@ -34,7 +38,7 @@
       width="30%"
       center
     >
-      <el-form label-width="45px" :model="registerFormData">
+      <el-form label-width="4.5rem" :model="registerFormData">
         <el-form-item label="账号">
           <el-input v-model="registerFormData.name" required></el-input>
         </el-form-item>
@@ -76,7 +80,7 @@
           <el-input
             type="primary"
             placeholder="请输入你想查询的店铺"
-            style="width: 200px;margin-right: 20px;margin-left: 10px;"
+            style="width: 20rem;margin-right: 2rem;margin-left: 1rem;"
           ></el-input>
           <el-button icon="el-icon-search" circle></el-button>
           <el-button
@@ -263,7 +267,7 @@ a {
 }
 
 .el-menu--popup {
-  width: 150px;
+  width: 15rem;
 }
 
 #container {
@@ -273,10 +277,10 @@ a {
     }
   }
   height: 100%;
+  width: 100%;
   /*布局*/
   .el-container {
     height: 100%;
-
     .el-header {
       color: #333;
       text-align: center;
@@ -303,6 +307,7 @@ a {
       color: #333;
       text-align: center;
       height: 100%;
+      width: 100%;
       padding: 0;
       #content {
         height: 100%;

@@ -10,6 +10,7 @@ Vue.prototype.$api = api.MyRequest;
 Vue.config.productionTip = false;
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/display.css';
 Vue.use(ElementUI);
 /* eslint-disable no-new */
 import '../static/css/animate.min.css'

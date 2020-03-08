@@ -21,6 +21,7 @@ export default {
     "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", sans-serif;
   height: 100%;
+  width: 100%;
   font-weight: 400;
 }
 ul,
@@ -38,7 +39,7 @@ i {
 }
 .el-dialog__body,
 .el-dialog--center .el-dialog__body {
-  padding: 20px 70px;
+  padding: 2rem 70rem;
 }
 .el-collapse-item__header {
   color: #409eff;
@@ -51,14 +52,14 @@ i {
   background-color: #f9f9f9 !important;
 }
 .el-tree-node__label {
-  font-size: 21px;
+  font-size: 2.1rem;
 }
 .el-tree-node__content {
-  height: 30px;
-  line-height: 30px;
+  height: 3rem;
+  line-height: 3rem;
 }
 .el-tree-node__expand-icon {
-  font-size: 21px;
+  font-size: 2.1rem;
 }
 .el-drawer{
   outline: 0;
