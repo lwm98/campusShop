@@ -24,20 +24,20 @@
               <div class="commentUser">
                 <div class="headImg">
                   <div class="flag"></div>
-                  <el-image :src="userInfo.image"></el-image>
+                  <el-image :src="newsUser.image"></el-image>
                 </div>
               </div>
               <h5
                 style="font-weight: 400;font-size: 20px;margin: 0;margin-top: 16px;color:#2d64b3;"
               >
-                {{ userInfo.name }} ( {{ userInfo.id }} )
+                {{ newsUser.name }} ( {{ newsUser.id }} )
                 <i
-                  v-if="userInfo.sex == '男'"
+                  v-if="newsUser.sex == '男'"
                   class="el-icon-male"
                   style="color:blue"
                 ></i>
                 <i
-                  v-if="userInfo.sex == '女'"
+                  v-if="newsUser.sex == '女'"
                   class="el-icon-female"
                   style="color:deeppink"
                 ></i>
@@ -170,6 +170,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "comments",
   data() {
@@ -181,7 +182,7 @@ export default {
       activeNames: [""], //
       newsId: "",
       louzhuInfo: "",
-      userInfo: {},
+      newsUser: {},
       newsInfo: {
         // id: 1,
         // img: "/static/img/new/commentImg.jpg",
@@ -195,28 +196,28 @@ export default {
       comment: []
     };
   },
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo
+    })
+  },
   created() {
     this.getCommentInfo();
     this.getNewInfo();
-    // let u = window.localStorage.getItem("userData");
-    // if (u != "" || u != null) {
-    //   this.userInfo = JSON.parse(u);
-    //   // console.log(this.userInfo)
-    // }
   },
   methods: {
     async getNewInfo() {
       let a = await this.$api("/api/getNews", "GET", {
         id: this.$route.params.id
-      })
+      });
       this.newsInfo = a.data;
-      let b = await this.$api("/api/getNewsUser","GET",{
+      let b = await this.$api("/api/getNewsUser", "GET", {
         id: this.newsInfo.userId
-      })
-      this.userInfo = b.data;
+      });
+      this.newsUser = b.data;
     },
     getCommentInfo() {
-      this.newsId = this.$route.params.id;
+      this.newsId = parseInt(this.$route.params.id);
       this.$api("/api/getCommentInfo", "POST", {
         news_id: this.newsId
       }).then(res => {
@@ -229,7 +230,7 @@ export default {
     addComment() {
       this.newCommentDialog = true;
       this.$api("/api/sendCommentInfo", "POST", {
-        news_id: this.news_id,
+        news_id: this.newsId,
         content: this.commentContent,
         userId: this.userInfo.id
       }).then(res => {
@@ -244,8 +245,8 @@ export default {
       });
     },
     replyCom(pid, commentid) {
-      this.$api("/api/sendCommentInfo", "POST", {
-        news_id: this.news_id,
+      this.$api("/api/sendCommentInfo", "post", {
+        news_id: this.newsId,
         content: this.content,
         pid: pid,
         reply_id: commentid,
@@ -315,7 +316,7 @@ export default {
     width: 36px;
     height: 36px;
     top: 2px;
-    right: 82px;
+    right: 145px;
     background: url(//tb2.bdstatic.com/tb/static-user/widget/pb_author/images/louzhu_b77db49.png)
       no-repeat -44px 0;
     border: 0 solid red;

@@ -39,7 +39,7 @@ i {
 }
 .el-dialog__body,
 .el-dialog--center .el-dialog__body {
-  padding: 2rem 70rem;
+  padding: 2rem 7rem;
 }
 .el-collapse-item__header {
   color: #409eff;
@@ -66,5 +66,9 @@ i {
 }
 .el-drawer__header>:first-child{
   outline: 0;
+}
+.el-dialog__footer{
+  padding-top:0 ;
+  margin-top: -2rem;
 }
 </style>

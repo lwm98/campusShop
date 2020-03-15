@@ -2,9 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import indexFrame from "../views/index/indexFrame";
 import indexContent from "../views/index/indexContent";
-// import yaYuan from "../views/yaYuan/index";
-// import boYuan from "../views/boYuan/index";
-import nanYuan from "../views/nanYuan/index";
+import nanYuan from "../views/store/index";
 import comment from "../components/comments.vue";
 import mine from "../views/mine/index";
 import mineIndex from "../views/mine/mineIndex";
@@ -14,7 +12,23 @@ import mineComments from "../views/mine/mineComments";
 import mineReply from "../views/mine/mineReply";
 import mineRemind from "../views/mine/mineRemind";
 import mineSecurity from "../views/mine/mineSecurity";
-import news from '../views/news';
+import manage from "../views/manage/manage.vue";
+import haveNoAuth from '../views/error/403.vue';
+import news from "../views/news";
+import checkUser from '@/views/manage/checkUser';
+import editUser from '@/views/manage/editUser';
+import deleteUser from '@/views/manage/deleteUser';
+import checkStore from '@/views/manage/checkStore';
+import editStore from '@/views/manage/editStore';
+import deleteStore from '@/views/manage/deleteStore';
+import checkNews from '@/views/manage/checkNews';
+import editNews from '@/views/manage/editNews';
+import deleteNews from '@/views/manage/deleteNews';
+import checkComment from '@/views/manage/checkComment';
+import editComment from '@/views/manage/editComment';
+import deleteComment from '@/views/manage/deleteComment';
+import leasingStore from '@/views/store/leasingStore';
+
 Vue.use(Router);
 
 export default new Router({
@@ -79,16 +93,24 @@ export default new Router({
           name: "所有资讯",
           component: news
         },
-        // {
-        //   path: "yaYuan",
-        //   name: "雅苑",
-        //   component: yaYuan
-        // },
-        // {
-        //   path: "boYuan",
-        //   name: "博苑",
-        //   component: boYuan
-        // },
+        {
+          path: "manage",
+          name: "管理",
+          meta: { authority: "admin" },
+          component: manage,
+          children:[
+            {
+              path:'checkUser',
+              name: '查看用户',
+              component: checkUser
+            }
+          ]
+        },
+        {
+          path: '403',
+          name: "出错了，您没有权限",
+          component: haveNoAuth
+        },
         {
           path: "area/:id/:name",
           name: "商区",

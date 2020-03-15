@@ -205,101 +205,7 @@ export default {
       shopInfo: "",
       activityInfo: "",
       newsInfo: "",
-      data: [
-        {
-          label: "爱时尚",
-          children: [
-            {
-              label: "Q堡堡",
-              value: "30101"
-            },
-            {
-              label: "张亮麻辣烫"
-            },
-            {
-              label: "正新鸡排"
-            },
-            {
-              label: "书亦烧仙草"
-            },
-            {
-              label: "牛杂"
-            },
-            {
-              label: "益合堂"
-            },
-            {
-              label: "关东煮"
-            },
-            {
-              label: "主恩美食"
-            }
-          ]
-        },
-        {
-          label: "学生超市",
-          children: [
-            {
-              label: "二级 2-1",
-              children: [
-                {
-                  label: "三级 2-1-1"
-                }
-              ]
-            },
-            {
-              label: "美食每刻",
-              children: [
-                {
-                  label: "三级 2-2-1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          label: "杏林春",
-          children: [
-            {
-              label: "二级 3-1",
-              children: [
-                {
-                  label: "三级 3-1-1"
-                }
-              ]
-            },
-            {
-              label: "二级 3-2",
-              children: [
-                {
-                  label: "三级 3-2-1"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          label: "杏林春",
-          children: [
-            {
-              label: "二级 3-1",
-              children: [
-                {
-                  label: "三级 3-1-1"
-                }
-              ]
-            },
-            {
-              label: "二级 3-2",
-              children: [
-                {
-                  label: "三级 3-2-1"
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      data: [],
       defaultProps: {
         children: "children",
         label: "label"
@@ -307,12 +213,27 @@ export default {
     };
   },
   methods: {
-    getActsList(store_id){
-      this.$api("/api/getActsList","GET",{
+    initStore(area_id) {
+      this.$api("/api/getStoreByArea", "GET", {
+        id: area_id
+      }).then(res => {
+        console.log(res);
+
+        res.data.forEach(element => {
+          console.log(element);
+          let obj = {};
+          obj.label = element.name;
+          obj.value = element.id;
+          this.data.push(obj);
+        });
+      });
+    },
+    getActsList(store_id) {
+      this.$api("/api/getActsList", "GET", {
         store_id: store_id
-      }).then(res =>{
+      }).then(res => {
         this.activityInfo = res.data;
-      })
+      });
     },
     getNewsList(store_id) {
       this.$api("/api/getNewsList", "GET", {
@@ -324,25 +245,26 @@ export default {
     handleClose() {
       this.drawer = false;
     },
-    handleChange() { //活动内的列表
+    handleChange() {
+      //活动内的列表
       // console.log("aa");
     },
     handleClick(e) {
       switch (e.index) {
-        case '1':
+        case "1":
           this.getActsList(this.store_id);
           break;
-        case '2':
+        case "2":
           this.getNewsList(this.store_id);
           break;
-        case '3':
+        case "3":
           break;
       }
     },
     handleNodeClick(data) {
       console.log(data);
       this.store_id = data.value;
-      this.$api("/api/getAllStoreInfo", "POST", {
+      this.$api("/api/getStoreByid", "get", {
         id: data.value
       }).then(res => {
         console.log(res);
@@ -370,12 +292,10 @@ export default {
     /**
      * 这里开始初始化商区数据
      */
-    // console.log(this.$route);
-    // this.$api("/api/getArean", "GET", { id: this.$route.params.id }).then(
-    //   res => {
-    //     console.log(res.data);
-    //   }
-    // );
+    this.data = [];
+    this.shopInfo = '';
+    this.initStore(this.$route.params.id);
+    console.log("进来");
   },
   mounted() {
     setTimeout(() => {

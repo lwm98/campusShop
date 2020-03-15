@@ -6,31 +6,30 @@
       width="30%"
       center
     >
-      <el-form
-        label-width="4.5rem"
-        :model="loginFormData"
-        label-position="left"
-      >
-        <el-form-item label="账号">
+      <el-form :model="loginFormData">
+        <el-form-item>
           <el-input
             v-model="loginFormData.id"
             :required="true"
             autofocus
+            placeholder="请输入用户名"
           ></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item>
           <el-input
             v-model="loginFormData.password"
             :required="true"
             clearable
             show-password
+            placeholder="请输入密码"
           ></el-input>
         </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="sendLogin" style="width:100%;"
+            >登录</el-button
+          >
+        </el-form-item>
       </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="sendLogin">登录</el-button>
-        <el-button @click="loginDialogVisible = false">取消</el-button>
-      </span>
     </el-dialog>
     <el-dialog
       title="请注册"
@@ -83,6 +82,12 @@
             style="width: 20rem;margin-right: 2rem;margin-left: 1rem;"
           ></el-input>
           <el-button icon="el-icon-search" circle></el-button>
+          <el-menu-item
+            index="/manage"
+            v-if="userInfo !== null && userInfo.role == 'admin'"
+            >管理</el-menu-item
+          >
+          <el-menu-item index="/manage">租赁商铺</el-menu-item>
           <el-button
             type="primary"
             plain
