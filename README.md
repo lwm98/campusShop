@@ -1,6 +1,6 @@
-# campusShop
+# campusShop 毕业设计
 这是我的校园商铺管理系统前端部分。<br>
-使用技术栈有 vue vue-router axios vue-x。<br>
+使用技术栈有 vue vue-router axios vuex。<br>
 目前所完成的功能有 登录注册，个人资料修改，商铺展示及查看，资讯展示及查看，资讯评论及回复。
 > A Vue.js project
 
