@@ -171,6 +171,9 @@
 
 <script>
 import { mapState } from "vuex";
+import { getCommentInfo, sendCommentInfo } from "../http/comment";
+import { getNews, getNewsUser } from "../http/news";
+
 export default {
   name: "comments",
   data() {
@@ -207,54 +210,107 @@ export default {
   },
   methods: {
     async getNewInfo() {
-      let a = await this.$api("/api/getNews", "GET", {
+      let a = await getNews({
         id: this.$route.params.id
       });
-      this.newsInfo = a.data;
-      let b = await this.$api("/api/getNewsUser", "GET", {
+      this.newsInfo = a.data.data;
+      let b = await getNewsUser({
         id: this.newsInfo.userId
       });
-      this.newsUser = b.data;
+      this.newsUser = b.data.data;
+      // let a = await this.$api("/api/getNews", "GET", {
+      //   id: this.$route.params.id
+      // });
+      // this.newsInfo = a.data;
+      // let b = await this.$api("/api/getNewsUser", "GET", {
+      //   id: this.newsInfo.userId
+      // });
+      // this.newsUser = b.data;
     },
     getCommentInfo() {
       this.newsId = parseInt(this.$route.params.id);
-      this.$api("/api/getCommentInfo", "POST", {
+      getCommentInfo({
         news_id: this.newsId
-      }).then(res => {
-        console.log(res);
-        if (res.code == 0) {
-          this.comment = res.data;
-        }
-      });
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data.code == 0) {
+            this.comment = res.data.data;
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/getCommentInfo", "POST", {
+      //   news_id: this.newsId
+      // }).then(res => {
+      //   console.log(res);
+      //   if (res.code == 0) {
+      //     this.comment = res.data.data;
+      //   }
+      // });
     },
     addComment() {
       this.newCommentDialog = true;
-      this.$api("/api/sendCommentInfo", "POST", {
+      sendCommentInfo({
         news_id: this.newsId,
         content: this.commentContent,
         userId: this.userInfo.id
-      }).then(res => {
-        console.log(res);
-        this.newCommentDialog = false;
-        this.$notify({
-          title: "评论成功",
-          message: "这是一条成功的提示消息",
-          type: "success"
+      })
+        .then(res => {
+          console.log(res);
+          this.newCommentDialog = false;
+          this.$notify({
+            title: "评论成功",
+            message: "这是一条成功的提示消息",
+            type: "success"
+          });
+          this.getCommentInfo();
+        })
+        .catch(error => {
+          console.log(error);
         });
-        this.getCommentInfo();
-      });
+      // this.$api("/api/sendCommentInfo", "POST", {
+      //   news_id: this.newsId,
+      //   content: this.commentContent,
+      //   userId: this.userInfo.id
+      // }).then(res => {
+      //   console.log(res);
+      //   this.newCommentDialog = false;
+      //   this.$notify({
+      //     title: "评论成功",
+      //     message: "这是一条成功的提示消息",
+      //     type: "success"
+      //   });
+      //   this.getCommentInfo();
+      // });
     },
     replyCom(pid, commentid) {
-      this.$api("/api/sendCommentInfo", "post", {
+      sendCommentInfo({
         news_id: this.newsId,
         content: this.content,
         pid: pid,
         reply_id: commentid,
         userId: this.userInfo.id
-      }).then(res => {
-        console.log(res);
-        this.getCommentInfo();
-      });
+      })
+        .then(res => {
+          console.log(res);
+          this.getCommentInfo();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      // this.$api("/api/sendCommentInfo", "post", {
+      //   news_id: this.newsId,
+      //   content: this.content,
+      //   pid: pid,
+      //   reply_id: commentid,
+      //   userId: this.userInfo.id
+      // }).then(res => {
+      //   console.log(res);
+      //   this.getCommentInfo();
+      // });
     },
     toGood() {
       this.$notify({

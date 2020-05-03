@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import { getAreaInfo, clicksAddInfo } from "../../http/store";
 export default {
   name: "content",
   data() {
@@ -93,19 +94,37 @@ export default {
   mounted() {},
   methods: {
     initArea() {
-      this.$api("/api/getAreaInfo", "GET", {}).then(res => {
-        console.log(res);
-        this.areaList = res.data;
-        console.log(this.areaList);
-      });
+      getAreaInfo()
+        .then(res => {
+          console.log(res);
+          this.areaList = res.data.data;
+          console.log(this.areaList);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/getAreaInfo", "GET", {}).then(res => {
+      //   console.log(res);
+      //   this.areaList = res.data.data;
+      //   console.log(this.areaList);
+      // });
     },
     toTotal(i) {
       console.log(i);
-      this.$api("/api/clicksAddInfo", "post", {
+      clicksAddInfo({
         id: i
-      }).then(res => {
-        console.log(res);
-      });
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/clicksAddInfo", "post", {
+      //   id: i
+      // }).then(res => {
+      //   console.log(res);
+      // });
     }
   }
 };

@@ -140,6 +140,9 @@
 
 <script>
 import { mapState } from "vuex";
+import { clicksAddInfo } from "../../http/store";
+import { loginInfo, registerInfo ,loginOut} from "../../http/login";
+
 export default {
   name: "index",
   data() {
@@ -161,25 +164,49 @@ export default {
   methods: {
     toTotal(i) {
       console.log(i);
-      this.$api("/api/clicksAddInfo", "post", {
+
+      clicksAddInfo({
         id: i
-      }).then(res => {
-        console.log(res);
-      });
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/clicksAddInfo", "post", {
+      //   id: i
+      // }).then(res => {
+      //   console.log(res);
+      // });
     },
     sendLoginOut() {
-      this.$api("/api/loginOut", "POST", {}).then(res => {
-        console.log(res);
-        // window.localStorage.removeItem('userData');
-        // this.userInfo = '';
-        this.$store.commit("user/CLEAR_USER");
-        this.$router.push({ path: "/" });
-        this.$notify({
-          title: "成功",
-          message: "已成功退出登录",
-          type: "success"
+      loginOut()
+        .then(res => {
+          console.log(res);
+          this.$store.commit("user/CLEAR_USER");
+          this.$router.push({ path: "/" });
+          this.$notify({
+            title: "成功",
+            message: "已成功退出登录",
+            type: "success"
+          });
+        })
+        .catch(error => {
+          console.log(error);
         });
-      });
+      // this.$api("/api/loginOut", "POST", {}).then(res => {
+      //   console.log(res);
+      //   // window.localStorage.removeItem('userData');
+      //   // this.userInfo = '';
+      //   this.$store.commit("user/CLEAR_USER");
+      //   this.$router.push({ path: "/" });
+      //   this.$notify({
+      //     title: "成功",
+      //     message: "已成功退出登录",
+      //     type: "success"
+      //   });
+      // });
     },
     sendRegister() {
       let state = "";
@@ -188,43 +215,87 @@ export default {
       } else {
         state = 0;
       }
-      this.$api("/api/registerInfo", "POST", {
+      registerInfo({
         password: this.registerFormData.password,
         name: this.registerFormData.name,
         Information_state: state
-      }).then(res => {
-        console.log(res);
-        if (res.register == "true") {
-          this.userInfo = res.User;
-          // window.localStorage.setItem('userData', JSON.stringify(res.User));
-          this.$store.commit("user/INIT_USER", res.User);
-          this.registerDialogVisible = false;
-          this.$notify({
-            title: "注册成功",
-            message: "已成功注册",
-            type: "success"
-          });
-        }
-      });
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data.register == "true") {
+            this.userInfo = res.data.User;
+            // window.localStorage.setItem('userData', JSON.stringify(res.User));
+            this.$store.commit("user/INIT_USER", res.data.User);
+            this.registerDialogVisible = false;
+            this.$notify({
+              title: "注册成功",
+              message: "已成功注册",
+              type: "success"
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      // this.$api("/api/registerInfo", "POST", {
+      //   password: this.registerFormData.password,
+      //   name: this.registerFormData.name,
+      //   Information_state: state
+      // }).then(res => {
+      //   console.log(res);
+      //   if (res.register == "true") {
+      //     this.userInfo = res.User;
+      //     // window.localStorage.setItem('userData', JSON.stringify(res.User));
+      //     this.$store.commit("user/INIT_USER", res.User);
+      //     this.registerDialogVisible = false;
+      //     this.$notify({
+      //       title: "注册成功",
+      //       message: "已成功注册",
+      //       type: "success"
+      //     });
+      //   }
+      // });
     },
     sendLogin() {
-      this.$api("/api/loginInfo", "post", {
+      loginInfo({
         name: this.loginFormData.id,
         password: this.loginFormData.password
-      }).then(res => {
-        if (res.login == "true") {
-          this.$store.commit("user/INIT_USER", res.User);
-          // this.userInfo = res.User;
-          // window.localStorage.setItem('userData', JSON.stringify(res.User));
-          // console.log(res);
-          this.loginDialogVisible = false;
-          this.$notify({
-            title: "登录成功",
-            message: "已成功登录",
-            type: "success"
-          });
-        }
-      });
+      })
+        .then(res => {
+          if (res.data.login == "true") {
+            this.$store.commit("user/INIT_USER", res.data.User);
+            // this.userInfo = res.User;
+            // window.localStorage.setItem('userData', JSON.stringify(res.User));
+            // console.log(res);
+            this.loginDialogVisible = false;
+            this.$notify({
+              title: "登录成功",
+              message: "已成功登录",
+              type: "success"
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/loginInfo", "post", {
+      //   name: this.loginFormData.id,
+      //   password: this.loginFormData.password
+      // }).then(res => {
+      //   if (res.login == "true") {
+      //     this.$store.commit("user/INIT_USER", res.User);
+      //     // this.userInfo = res.User;
+      //     // window.localStorage.setItem('userData', JSON.stringify(res.User));
+      //     // console.log(res);
+      //     this.loginDialogVisible = false;
+      //     this.$notify({
+      //       title: "登录成功",
+      //       message: "已成功登录",
+      //       type: "success"
+      //     });
+      //   }
+      // });
     },
     toLogin() {
       this.loginFormData.id = "";

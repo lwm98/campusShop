@@ -1,27 +1,27 @@
 //import localKey from './localKey'
 
  
-const devApiUrl = 'http://localhost:4399'; //本地开发环境
-const buildDevApiUrl = "http://120.27.0.149:8098"; //打包开发环境
-const buildTestApiUrl = "http://120.27.0.149:8098"; //打包测试环境
-const buildProApiUrl = "http://120.27.0.149:8098"; //打包正式环境
+// const devApiUrl = 'http://localhost:4399'; //本地开发环境
+// const buildDevApiUrl = "http://120.27.0.149:8098"; //打包开发环境
+// const buildTestApiUrl = "http://120.27.0.149:8098"; //打包测试环境
+// const buildProApiUrl = "http://120.27.0.149:8098"; //打包正式环境
 
-let useApiUrl;
+let useApiUrl = 'http://localhost:4399';
 
-switch (process.env.NODE_ENV) {
-  case "development":
-    useApiUrl = devApiUrl;
-    break;
-  case "buildDev":
-    useApiUrl = buildDevApiUrl;
-    break;
-  case "buildTest":
-    useApiUrl = buildTestApiUrl;
-    break;
-  case "production":
-    useApiUrl = buildProApiUrl;
-    break;
-}
+// switch (process.env.NODE_ENV) {
+//   case "development":
+//     useApiUrl = devApiUrl;
+//     break;
+//   case "buildDev":
+//     useApiUrl = buildDevApiUrl;
+//     break;
+//   case "buildTest":
+//     useApiUrl = buildTestApiUrl;
+//     break;
+//   case "production":
+//     useApiUrl = buildProApiUrl;
+//     break;
+// }
 
 export default {
   nodeDevEnv: process.env.NODE_ENV == "development", //开发

@@ -50,53 +50,55 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     //响应头状态200
-    if (response.status == 200) {
-      // console.log(response)
-      //返回code 为0
-      // console.log(typeof response.data);
-      if (typeof response.data == "string") {
-        console.log(response.data);
-        // response.data = JSON.parse(response.data);
-      }
-      if (response.data.code == 200) {
-        //console.log(response.data);
-        // console.log(response.config.url + '请求成功');
-        //登录时获取token
-        if (response.headers.authorization) {
-          //将token存入sessionStorage
-          window.localStorage.setItem("token", response.headers.authorization);
-        }
-        //返回接口数据
-        // console.log(response);
-        return response.data.data;
-      } else if (response.data.code == 3000) {
-        console.log(response.config.url + "   失败");
-        console.log(response.data.msg);
-        return Promise.reject("error");
-      } else if (response.data.code === 10006) {
-        console.log("token可能过期了");
-        window.localStorage.removeItem("token");
-        router.push({ path: "/login" });
-        return Promise.reject("error");
-      } else {
-        console.log(response.data);
-        console.log(response.config.url + "   失败");
-        //请求失败提示msg
-        Notification({
-          title: response.data.msg || "" + response.data.message || "",
-          type: "warning",
-        });
-        return Promise.reject("error");
-      }
-    } else {
-      //请求报错提示msg
-      Notification({
-        title: "数据返回出错",
-        message: "请稍后重试",
-        type: "warning",
-      });
-      return Promise.reject("error");
-    }
+    console.log(response);
+    return response;
+    // if (response.status == 200) {
+    //   // console.log(response)
+    //   //返回code 为0
+    //   // console.log(typeof response.data);
+    //   if (typeof response.data == "string") {
+    //     console.log(response.data);
+    //     // response.data = JSON.parse(response.data);
+    //   }
+    //   if (response.data.code == 200) {
+    //     //console.log(response.data);
+    //     // console.log(response.config.url + '请求成功');
+    //     //登录时获取token
+    //     if (response.headers.authorization) {
+    //       //将token存入sessionStorage
+    //       window.localStorage.setItem("token", response.headers.authorization);
+    //     }
+    //     //返回接口数据
+    //     // console.log(response);
+    //     return response.data.data;
+    //   } else if (response.data.code == 3000) {
+    //     console.log(response.config.url + "   失败");
+    //     console.log(response.data.msg);
+    //     return Promise.reject("error");
+    //   } else if (response.data.code === 10006) {
+    //     console.log("token可能过期了");
+    //     window.localStorage.removeItem("token");
+    //     router.push({ path: "/login" });
+    //     return Promise.reject("error");
+    //   } else {
+    //     console.log(response.data);
+    //     console.log(response.config.url + "   失败");
+    //     //请求失败提示msg
+    //     Notification({
+    //       title: response.data.msg || "" + response.data.message || "",
+    //       type: "warning",
+    //     });
+    //     return Promise.reject("error");
+    //   }
+    // } else {
+    //   //请求报错提示msg
+    //   Notification({
+    //     title: "数据返回出错",
+    //     message: "请稍后重试",
+    //     type: "warning",
+    //   });
+    //   return Promise.reject("error");
+    // }
   },
   (error) => {
     console.log(error);

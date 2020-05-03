@@ -191,6 +191,10 @@
 
 <script>
 import { WOW } from "../../../static/js/wow.min.js";
+import { getNewsList } from "../../http/news";
+import { getStoreByid, getStoreByArea } from "../../http/store";
+import { getActsList } from "../../http/act";
+
 export default {
   name: "index.vue",
   data() {
@@ -214,33 +218,68 @@ export default {
   },
   methods: {
     initStore(area_id) {
-      this.$api("/api/getStoreByArea", "GET", {
+      getStoreByArea({
         id: area_id
-      }).then(res => {
-        console.log(res);
-
-        res.data.forEach(element => {
-          console.log(element);
-          let obj = {};
-          obj.label = element.name;
-          obj.value = element.id;
-          this.data.push(obj);
+      })
+        .then(res => {
+          console.log(res);
+          res.data.data.forEach(element => {
+            console.log(element);
+            let obj = {};
+            obj.label = element.name;
+            obj.value = element.id;
+            this.data.push(obj);
+          });
+        })
+        .catch(error => {
+          console.log(error);
         });
-      });
+      // this.$api("/api/getStoreByArea", "GET", {
+      //   id: area_id
+      // }).then(res => {
+      //   console.log(res);
+
+      //   res.data.data.forEach(element => {
+      //     console.log(element);
+      //     let obj = {};
+      //     obj.label = element.name;
+      //     obj.value = element.id;
+      //     this.data.push(obj);
+      //   });
+      // });
     },
     getActsList(store_id) {
-      this.$api("/api/getActsList", "GET", {
+      getActsList({
         store_id: store_id
-      }).then(res => {
-        this.activityInfo = res.data;
-      });
+      })
+        .then(res => {
+          this.activityInfo = res.data.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/getActsList", "GET", {
+      //   store_id: store_id
+      // }).then(res => {
+      //   this.activityInfo = res.data.data;
+      // });
     },
     getNewsList(store_id) {
-      this.$api("/api/getNewsList", "GET", {
+      getNewsList({
         store_id: store_id
-      }).then(res => {
-        this.newsInfo = res.data;
-      });
+      })
+        .then(res => {
+          console.log(res);
+          this.newsInfo = res.data.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/getNewsList", "GET", {
+      //   store_id: store_id
+      // }).then(res => {
+      //   this.newsInfo = res.data.data;
+      // });
     },
     handleClose() {
       this.drawer = false;
@@ -264,28 +303,54 @@ export default {
     handleNodeClick(data) {
       console.log(data);
       this.store_id = data.value;
-      this.$api("/api/getStoreByid", "get", {
+      getStoreByid({
         id: data.value
-      }).then(res => {
-        console.log(res);
-        if (res.code == 0) {
-          this.shopInfo = res.data[0];
-          this.shopInfo.img = [];
-          this.shopInfo.menu = [];
-          this.shopInfo.voucher = [];
-          for (let i = 1; i <= 5; i++) {
-            if (res.data[0]["banner" + i]) {
-              this.shopInfo.img.push(res.data[0]["banner" + i]);
-            }
-            if (res.data[0]["menu" + i]) {
-              this.shopInfo.menu.push(res.data[0]["menu" + i]);
-            }
-            if (res.data[0]["voucher" + i]) {
-              this.shopInfo.voucher.push(res.data[0]["voucher" + i]);
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data.code == 0) {
+            this.shopInfo = res.data.data[0];
+            this.shopInfo.img = [];
+            this.shopInfo.menu = [];
+            this.shopInfo.voucher = [];
+            for (let i = 1; i <= 5; i++) {
+              if (res.data.data[0]["banner" + i]) {
+                this.shopInfo.img.push(res.data.data[0]["banner" + i]);
+              }
+              if (res.data.data[0]["menu" + i]) {
+                this.shopInfo.menu.push(res.data.data[0]["menu" + i]);
+              }
+              if (res.data.data[0]["voucher" + i]) {
+                this.shopInfo.voucher.push(res.data.data[0]["voucher" + i]);
+              }
             }
           }
-        }
-      });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/getStoreByid", "get", {
+      //   id: data.value
+      // }).then(res => {
+      //   console.log(res);
+      //   if (res.code == 0) {
+      //     this.shopInfo = res.data.data[0];
+      //     this.shopInfo.img = [];
+      //     this.shopInfo.menu = [];
+      //     this.shopInfo.voucher = [];
+      //     for (let i = 1; i <= 5; i++) {
+      //       if (res.data.data[0]["banner" + i]) {
+      //         this.shopInfo.img.push(res.data.data[0]["banner" + i]);
+      //       }
+      //       if (res.data.data[0]["menu" + i]) {
+      //         this.shopInfo.menu.push(res.data.data[0]["menu" + i]);
+      //       }
+      //       if (res.data.data[0]["voucher" + i]) {
+      //         this.shopInfo.voucher.push(res.data.data[0]["voucher" + i]);
+      //       }
+      //     }
+      //   }
+      // });
     }
   },
   created() {
@@ -293,7 +358,7 @@ export default {
      * 这里开始初始化商区数据
      */
     this.data = [];
-    this.shopInfo = '';
+    this.shopInfo = "";
     this.initStore(this.$route.params.id);
     console.log("进来");
   },

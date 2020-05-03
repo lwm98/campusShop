@@ -94,8 +94,8 @@ export default {
     handleAvatarSuccess(res, file) {
       console.log(URL.createObjectURL(file.raw));
       console.log(res);
-      if (res.code == 0) {
-        this.userInfo.image = res.msg;
+      if (res.data.code == 0) {
+        this.userInfo.image = res.data.msg;
         // console.log(this.$root.userConData)
       }
     },
@@ -117,7 +117,7 @@ export default {
       } else {
         this.userInfo.information_state = 0;
       }
-      this.$api("/api/updateUserInfo", "POST", {
+      updateUserInfo({
         id: this.userInfo.id,
         name: this.userInfo.name,
         image: this.userInfo.image,
@@ -128,17 +128,44 @@ export default {
         Information_state: this.userInfo.information_state,
         autograph: this.userInfo.autograph,
         real_name: this.userInfo.real_name
-      }).then(res => {
-        if (res.updateUser == "true") {
-          // window.localStorage.setItem('userData', JSON.stringify(this.userInfo));
-          this.$store.commit("user/INIT_USER", this.userInfo);
-          this.$notify({
-            title: "修改成功",
-            message: "已成功修改",
-            type: "success"
-          });
-        }
-      });
+      })
+        .then(res => {
+          console.log(res);
+          if (res.data.updateUser == "true") {
+            // window.localStorage.setItem('userData', JSON.stringify(this.userInfo));
+            this.$store.commit("user/INIT_USER", this.userInfo);
+            this.$notify({
+              title: "修改成功",
+              message: "已成功修改",
+              type: "success"
+            });
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      // this.$api("/api/updateUserInfo", "POST", {
+      //   id: this.userInfo.id,
+      //   name: this.userInfo.name,
+      //   image: this.userInfo.image,
+      //   password: this.userInfo.password,
+      //   address: this.userInfo.address,
+      //   sex: this.userInfo.sex,
+      //   phone: this.userInfo.phone,
+      //   Information_state: this.userInfo.information_state,
+      //   autograph: this.userInfo.autograph,
+      //   real_name: this.userInfo.real_name
+      // }).then(res => {
+      //   if (res.updateUser == "true") {
+      //     // window.localStorage.setItem('userData', JSON.stringify(this.userInfo));
+      //     this.$store.commit("user/INIT_USER", this.userInfo);
+      //     this.$notify({
+      //       title: "修改成功",
+      //       message: "已成功修改",
+      //       type: "success"
+      //     });
+      //   }
+      // });
     }
   }
 };
