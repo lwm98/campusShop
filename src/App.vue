@@ -34,6 +34,21 @@ a {
 i {
   font-style: normal;
 }
+.el-table {
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+}
+.el-table td,
+.el-table th {
+  padding: 0px;
+}
+.el-table td{
+  padding: 10px 0;
+}
+.el-table thead tr {
+  height: 46px;
+  line-height: 46px;
+}
 .el-form-item__content {
   text-align: left;
 }
@@ -61,14 +76,14 @@ i {
 .el-tree-node__expand-icon {
   font-size: 2.1rem;
 }
-.el-drawer{
+.el-drawer {
   outline: 0;
 }
-.el-drawer__header>:first-child{
+.el-drawer__header > :first-child {
   outline: 0;
 }
-.el-dialog__footer{
-  padding-top:0 ;
+.el-dialog__footer {
+  padding-top: 0;
   margin-top: -2rem;
 }
 </style>

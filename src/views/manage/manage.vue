@@ -29,7 +29,7 @@
               ><span style="">店铺管理</span></span
             >
           </li>
-          <router-link to="/mine/comments" tag="li" class="security-list"
+          <router-link to="/manage/checkStore" tag="li" class="security-list"
             ><i class="security-icon el-icon-s-data"></i>
             <span class="security-nav-name">查看店铺</span></router-link
           >
@@ -47,7 +47,7 @@
               ><span style="">资讯管理</span></span
             >
           </li>
-          <router-link to="/mine/comments" tag="li" class="security-list"
+          <router-link to="/manage/checkNews" tag="li" class="security-list"
             ><i class="security-icon el-icon-s-data"></i>
             <span class="security-nav-name">查看资讯</span></router-link
           >

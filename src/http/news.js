@@ -27,3 +27,13 @@ export const getNewsList = function(params) {
     params
   });
 };
+
+
+//
+export const getAllNewsList = function(params) {
+  return request({
+    url: "/api/getAllNewsList",
+    method: "GET",
+    params
+  });
+};

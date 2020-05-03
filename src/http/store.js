@@ -36,3 +36,12 @@ export const clicksAddInfo = function (params) {
         params
     })
  }
+ 
+  // 
+export const getAllStoreList = function (params) { 
+    return request({
+        url:'/api/getAllStoreList',
+        method:'GET',
+        params
+    })
+ }

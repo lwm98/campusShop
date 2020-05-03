@@ -103,7 +103,18 @@ export default new Router({
               path:'checkUser',
               name: '查看用户',
               component: checkUser
-            }
+            },
+            {
+              path:'checkStore',
+              name: '查看商铺',
+              component: checkStore
+            },
+            
+            {
+              path:'checkNews',
+              name: '查看资讯',
+              component: checkNews
+            },
           ]
         },
         {

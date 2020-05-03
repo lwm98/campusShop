@@ -135,7 +135,7 @@
                 <el-input
                   size="small"
                   placeholder="请输入回复内容"
-                  v-model="content"
+                  v-model="item.reply_content"
                   style="width:200px;margin-top:10px;"
                 >
                 </el-input>
@@ -143,7 +143,7 @@
                   icon="el-icon-edit"
                   style="padding: 5px;height: 31px;line-height: 20px"
                   type="warning"
-                  @click="replyCom(item.id, item.user_id)"
+                  @click="replyCom(item.id, item.user_id,item.reply_content)"
                   >回复</el-button
                 >
               </div>
@@ -156,9 +156,10 @@
     <el-dialog title="提示" :visible.sync="newCommentDialog" width="50%" center>
       <el-input
         type="textarea"
-        :rows="2"
+        :rows="5"
         placeholder="请输入评论内容"
         v-model="commentContent"
+        style="margin-bottom:20px"
       >
       </el-input>
       <span slot="footer" class="dialog-footer">
@@ -285,10 +286,10 @@ export default {
       //   this.getCommentInfo();
       // });
     },
-    replyCom(pid, commentid) {
+    replyCom(pid, commentid,content) {
       sendCommentInfo({
         news_id: this.newsId,
-        content: this.content,
+        content: content,
         pid: pid,
         reply_id: commentid,
         userId: this.userInfo.id
@@ -372,7 +373,7 @@ export default {
     width: 36px;
     height: 36px;
     top: 2px;
-    right: 145px;
+    right: 82px;
     background: url(//tb2.bdstatic.com/tb/static-user/widget/pb_author/images/louzhu_b77db49.png)
       no-repeat -44px 0;
     border: 0 solid red;
