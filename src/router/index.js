@@ -93,6 +93,7 @@ export default new Router({
           name: "所有资讯",
           component: news
         },
+        {path:'leasingStore',name:'租赁商铺',component:()=>import('../views/store/leasingStore.vue')},
         {
           path: "manage",
           name: "管理",
@@ -103,6 +104,11 @@ export default new Router({
               path:'checkUser',
               name: '查看用户',
               component: checkUser
+            },
+            {
+              path:'editUser',
+              name: '编辑用户',
+              component:()=>import('../views/manage/editUser.vue')
             },
             {
               path:'checkStore',

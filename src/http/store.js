@@ -45,3 +45,21 @@ export const getAllStoreList = function (params) {
         params
     })
  }
+ 
+ // 
+export const getAllwzlStore = function (params) { 
+    return request({
+        url:'/api/getAllwzlStore',
+        method:'GET',
+        params
+    })
+ }
+
+  // 
+export const getAllzlStore = function (params) { 
+    return request({
+        url:'/api/getAllzlStore',
+        method:'GET',
+        params
+    })
+ }

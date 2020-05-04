@@ -121,6 +121,7 @@
               v-model="activeNames"
               @change="handleChange"
               style="background-color: #333;"
+              accordion
             >
               <el-collapse-item
                 v-for="(item, index) in activityInfo"

@@ -33,11 +33,11 @@
             ><i class="security-icon el-icon-s-data"></i>
             <span class="security-nav-name">查看店铺</span></router-link
           >
-          <router-link to="/mine/comments" tag="li" class="security-list"
+          <router-link to="/manage/editUser" tag="li" class="security-list"
             ><i class="security-icon el-icon-s-data"></i>
             <span class="security-nav-name">编辑店铺</span></router-link
           >
-          <router-link to="/mine/comments" tag="li" class="security-list"
+          <router-link to="/manage/editUser" tag="li" class="security-list"
             ><i class="security-icon el-icon-s-data"></i>
             <span class="security-nav-name">删除店铺</span></router-link
           >

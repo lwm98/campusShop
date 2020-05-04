@@ -64,7 +64,7 @@ i {
 .el-collapse-item__wrap,
 .el-collapse-item__header,
 .el-collapse-item__content {
-  background-color: #f9f9f9 !important;
+  /* background-color: #f9f9f9 !important; */
 }
 .el-tree-node__label {
   font-size: 2.1rem;

@@ -59,11 +59,13 @@
 <script>
 import axios from "axios";
 import { mapState } from "vuex";
+import app from '../../config/app';
+import {updateUserInfo} from '../../http/login';
 export default {
   name: "mineData",
   data() {
     return {
-      uploadIMGurl: "",
+      // uploadIMGurl: "",
       // userInfo:{
       //   image:''
       // },
@@ -77,12 +79,17 @@ export default {
   computed: {
     ...mapState({
       userInfo: state => state.user.userInfo
-    })
+    }),
+    uploadIMGurl:()=>{
+      console.log(app.apiUrl +'/api/upUserImage');
+      return app.apiUrl +'/api/upUserImage'
+    }
   },
   created() {
-    this.uploadIMGurl = axios.defaults.baseURL + "/api/upUserImage";
+    // console.log(object);
+    console.log(app);
+    // this.uploadIMGurl = app.apiUrl + "/api/upUserImage";
     this.routerName = this.$route.name;
-
     // this.userInfo = JSON.parse(window.localStorage.getItem('userData'))
     if (this.userInfo.information_state == 1) {
       this.state = true;
@@ -94,8 +101,8 @@ export default {
     handleAvatarSuccess(res, file) {
       console.log(URL.createObjectURL(file.raw));
       console.log(res);
-      if (res.data.code == 0) {
-        this.userInfo.image = res.data.msg;
+      if (res.code == 0) {
+        this.userInfo.image = res.msg;
         // console.log(this.$root.userConData)
       }
     },

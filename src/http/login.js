@@ -43,3 +43,13 @@ export const getAllUserList = function(params) {
     params
   });
 };
+
+export const delUserById = function(id) {
+  return request({
+    url: "/api/delUserById",
+    method: "POST",
+    params:{
+      id:id
+    }
+  });
+};

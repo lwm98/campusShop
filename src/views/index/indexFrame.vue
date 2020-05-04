@@ -87,7 +87,7 @@
             v-if="userInfo !== null && userInfo.role == 'admin'"
             >管理</el-menu-item
           >
-          <el-menu-item index="/manage">租赁商铺</el-menu-item>
+          <el-menu-item index="/leasingStore">租赁商铺</el-menu-item>
           <el-button
             type="primary"
             plain
